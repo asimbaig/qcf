@@ -1,0 +1,69 @@
+<div class="container"  ng-app="myApp">
+  <form ng-controller="eventProgramController as up" name="up.upload_form">
+
+      <br><br>
+      <h3>Register new Event/Program</h3>
+      <hr>
+
+    <div class="form-group">
+          <label for="eventProgramSelecter">Event / Program</label>
+          <select class="form-control" id="eventProgramSelecter" ng-model="up.data.type" required>
+              <option value="event">Event</option>
+              <option value="program">Program</option>
+          </select>
+    </div>
+
+    <div class="form-group">
+        <label for="causeCharity">Select Cause / Charity</label>
+        <select class="form-control" id="causeCharity" ng-model="up.data.CauseCharity" required>
+          <option ng-repeat="cc in causesCharities" value="{{cc.title}}">{{cc.title + " - " + cc.causeType}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" ng-model="up.data.title"/>
+    </div>
+
+    <div class="form-group">
+      <label for="eventProgramDescription">Description</label>
+      <textarea class="form-control form-rounded" rows="3" id="eventProgramDescription" placeholder="Description..." ng-model="up.data.eventProgramDesc" ng-required="true"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="eventProgramDate">Select date</label>
+      <datepicker date-format="dd-MM-yyyy">
+          <input class="form-control" ng-model="p.data.date" type="text"/>
+      </datepicker>
+    </div>
+
+    <div class="form-group">
+      <label for="eventProgramLocation">Location</label>
+      <input type="text" class="form-control" id="eventProgramLocation" placeholder="if applicable" ng-model="up.data.location"/>
+    </div>
+
+    <div class="form-group">
+      <label for="profileInputFile">Upload Picture</label>
+      <input
+          type="file"
+          ngf-select
+          ng-model="up.file"
+          name="file"
+          ngf-pattern="'image/*'"
+          accept="image/*"
+          ngf-max-size="20MB"
+          id="profileInputFile"
+          />
+      <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+      <i ng-show="up.upload_form.file.$error.maxSize">File too large
+      {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+      <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file"/>
+      <!--<p>{{up.progress}}</p>-->
+    </div>
+
+
+
+    <button type="submit"  ng-click="up.submitFile()" class="btn btn-primary" style="float: right">Submit</button>
+            <br><br><br>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+{
+  "name": "quartet-foundation-project",
+  "version": "1.0.0",
+  "description": "Quartet Foundation Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "asim",
+  "license": "ISC",
+  "dependencies": {
+    "angular-file-upload": "^2.5.0",
+    "angularjs-datepicker": "^2.1.23",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "heroku": "^0.2.0",
+    "mongoose": "^4.13.4",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asimbaig/qcf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asimbaig/qcf/issues"
+  },
+  "homepage": "https://github.com/asimbaig/qcf#readme"
+}

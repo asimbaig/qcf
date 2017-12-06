@@ -1,0 +1,113 @@
+<div>
+    <div class="container"  id="main-border">
+    <div class="row">
+
+          <ul class="nav nav-tabs flex-wrap" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link" href="#newsTab" role="tab" data-toggle="tab" ng-click="mc.addNews()">News</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#eventsTab" role="tab" data-toggle="tab" ng-click="mc.addEvents()">Events/Programs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#charityTab" role="tab" data-toggle="tab" ng-click="mc.addCharity()">Charities/Causes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#succesStoriesTab" role="tab" data-toggle="tab" ng-click="mc.addSStories()">Success Stories</a>
+              </li>
+              <!--<li class="nav-item">
+                <a class="nav-link" href="#articlesTab" role="tab" data-toggle="tab" ng-click="mc.addArticles()">Helping Articles</a>
+              </li>-->
+              <li class="nav-item">
+                <a class="nav-link" href="#businessTab" role="tab" data-toggle="tab" ng-click="mc.addPartners()">Our Sponsors</a>
+              </li>
+          </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content justify-content-center" style = "width:98%;">
+                  <div role="tabpanel" class="tab-pane active" id="newsTab">
+                    <div ng-repeat="n in newss">
+                    <div class="card">
+                      <div class="card-block">
+                        <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                            <strong class="card-title">{{n.title}}</strong>
+                            <p class="card-text"><i>Published on : {{n.published}}</i></p>
+                        </div>
+                        <img class="card-img-top"  ng-src="{{n.url}}" alt="{{n.title}}">
+                        <p class="card-text">{{n.details}}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade" id="eventsTab">
+                    <div ng-repeat="e in events">
+                      <div class="card">
+                        <div class="card-block">
+                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                              <p><strong class="card-title">{{e.title}}</strong></p>
+                              <p><strong class="card-title">{{e.CauseCharity}}</strong></p>
+                              <p><strong class="card-title">{{e.date}}</strong></p>
+                          </div>
+                          <img ng-src="{{e.picture}}" alt="{{e.title}}">
+                          <p class="card-text">{{e.eventProgramDesc}}</p>
+                          <p class="card-text"><strong>Location:</strong> {{e.location}}</p>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade" id="charityTab">
+                    <div ng-repeat="c in charity">
+                      <div class="card">
+                        <div class="card-block">
+                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                              <p><strong class="card-title">{{c.title}}</strong></p>
+                              <p><strong class="card-title">{{c.causeType}}</strong></p>
+                          </div>
+                          <img ng-src="{{c.picture}}" alt="{{c.title}}">
+                          <p class="card-text">{{c.causeCharityDesc}}</p>
+                          <p class="card-text"><strong>Phone:</strong> {{c.phone}}</p>
+                          <p class="card-text"><strong>Email:</strong> {{c.email}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade" id="succesStoriesTab">
+                    <div ng-repeat="s in sstories">
+                      <div class="card">
+                        <div class="card-block">
+                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                              <strong class="card-title">{{s.title}}</strong>
+                              <p class="card-text"><i>Published on : {{s.published}}</i></p>
+                          </div>
+                          <img class="card-img-top" ng-src="{{s.url}}" alt="{{s.title}}">
+                          <p class="card-text">{{s.details}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div role="tabpanel" class="tab-pane fade" id="businessTab">
+                    <div ng-repeat="p in partners">
+                      <div class="card">
+                        <div class="card-block">
+                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                              <strong class="card-title">{{p.companyName}}</strong>
+                          </div>
+                          <img ng-src="{{p.logoPicture}}" alt="{{p.companyName}}">
+                          <p class="card-text">{{p.details}}</p>
+                          <p class="card-text"><strong>Phone:</strong> {{p.phone}}</p>
+                          <p class="card-text"><strong>Email:</strong> {{p.email}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+        </div>
+</div>
+<div>

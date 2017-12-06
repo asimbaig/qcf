@@ -1,0 +1,135 @@
+  <div class="container" ng-app="myApp">
+      <form ng-controller="causeCharityController as up" name="up.upload_form">
+
+      <br><br>
+      <h3>Register new Cause / Charity</h3>
+      <hr>
+
+    <div class="form-group">
+          <label for="causeCharitySelecter">Cause / Charity</label>
+          <select class="form-control" id="causeCharitySelecter" ng-model="up.data.type" required>
+              <option value="cause">Cause</option>
+              <option value="charity">Charity</option>
+          </select>
+    </div>
+
+    <div class="form-group">
+          <label for="causeCharityType">Type of Cause / Charity</label>
+          <select class="form-control" id="causeCharityType" ng-model="up.data.causeType" required>
+            <optgroup label="Fairness" style="background-color:#C9FFE5;">
+                   <option>Bullying</option>
+                   <option>Disability and Access issues</option>
+                   <option>Poverty and disadvantage</option>
+                   <option>Social inclusion and fairness</option>
+                   <option>Social Services and activities</option>
+                   <option>Stigma/Discrimination</option>
+                   <option>Financial exclusion and financial illiteracy </option>
+            </optgroup>
+            <optgroup label="Safety" style="background-color:#EFDECD;">
+                   <option>Anti-social behaviour</option>
+                   <option>Crime and safety</option>
+                   <option>Domestic violence </option>
+                   <option>Emergency/Rescue services</option>
+                   <option>Gangs</option>
+                   <option>Harmful practice</option>
+                   <option>Offending/At risk of offending</option>
+                   <option>Sexual abuse</option>
+                   <option>Violence and Exploitation </option>
+            </optgroup>
+            <optgroup label="Housing & homelessness" style="background-color:#F19CBB;">
+                   <option>Homelessness</option>
+                   <option>Housing</option>
+            </optgroup>
+            <optgroup label="Health" style="background-color:#FFBF00;">
+                   <option>Caring responsibilities</option>
+                   <option>Counselling / Advice / Mentoring</option>
+                   <option>Health, wellbeing and serious illness</option>
+                   <option>Sport and Recreation</option>
+                   <option>Substance abuse and addiction</option>
+                   <option>Mental health</option>
+                   <option>Reducing isolation</option>
+            </optgroup>
+            <optgroup label="Strong Communities" style="background-color:#FBCEB1;">
+                   <option>Community Support and Development</option>
+                   <option>Volunteering</option>
+                   <option>Stronger communities</option>
+                   <option>Supporting family life</option>
+                   <option>Language, culture and racial integration</option>
+                   <option>Religion</option>
+                   <option>Refugees/Asylum/Immigration</option>
+            </optgroup>
+            <optgroup label="Work and Local Economy" style="background-color:#FDEE00;">
+                   <option>Employment and Labour</option>
+                   <option>Building skills and improving access to employment</option>
+                   <option>Economy</option>
+                   <option>Social Enterprises</option>
+            </optgroup>
+            <optgroup label="Learning and Education" style="background-color:#FFFDD0;">
+                   <option>Education, learning and training</option>
+            </optgroup>
+            <optgroup label="Arts, Culture and Heritage" style="background-color:#66FF00;">
+                   <option>Arts, culture and heritage</option>
+            </optgroup>
+            <optgroup label="Rural issues" style="background-color:	#FCFFA4;">
+                   <option>Isolation</option>
+                   <option>Transportation</option>
+            </optgroup>
+            <optgroup label="Environment" style="background-color:#EEE0B1;">
+                   <option>Environment and improving surroundings</option>
+                   <option>Recycling</option>
+                   <option>Renewable energies</option>
+            </optgroup>
+
+          </select>
+    </div>
+
+    <div class="form-group">
+      <label for="title">Title/Name</label>
+      <input type="text" class="form-control" id="title" ng-model="up.data.title"/>
+    </div>
+
+    <div class="form-group">
+      <label for="causeCharityDescription">Description</label>
+      <textarea class="form-control form-rounded" rows="3" id="causeCharityDescription" placeholder="Description..." ng-model="up.data.causeCharityDesc" ng-required="true"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="causeCharityAddress">Address</label>
+      <input type="text" class="form-control" id="causeCharityAddress" placeholder="if applicable" ng-model="up.data.address"/>
+    </div>
+
+    <div class="form-group">
+      <label for="causeCharityPhone">Phone</label>
+      <input type="text" class="form-control" id="causeCharityPhone"  placeholder="if applicable" ng-model="up.data.phone"/>
+    </div>
+    <div class="form-group">
+      <label for="causeCharityEmail">Email address</label>
+      <input type="email" class="form-control" id="causeCharityEmail" placeholder="if applicable" ng-model="up.data.email"/>
+    </div>
+
+    <div class="form-group">
+      <label for="profileInputFile">Upload Picture</label>
+      <input
+          type="file"
+          ngf-select
+          ng-model="up.file"
+          name="file"
+          ngf-pattern="'image/*'"
+          accept="image/*"
+          ngf-max-size="20MB"
+          id="profileInputFile"
+          />
+      <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+      <i ng-show="up.upload_form.file.$error.maxSize">File too large
+      {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+      <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file"/>
+      <!--<p>{{up.progress}}</p>-->
+    </div>
+
+
+
+    <button type="submit"  ng-click="up.submitFile()" class="btn btn-primary" style="float: right">Submit</button>
+            <br><br><br>
+
+  </form>
+  </div>

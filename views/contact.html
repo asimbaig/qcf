@@ -1,0 +1,31 @@
+<div class="container">
+	<br><br>
+	<h3>Contact Us</h3>
+	<hr>
+	<form  name="contactForm" ng-submit="sendMessage()" novalidate>
+
+		<div class="form-group">
+			<label for="contactName">Name</label>
+			<input class="form-control" type="text" id="contactName" name="name" ng-model="contact.name" ng-required="true"/>
+			<div ng-show="contactForm.name.$touched && contactForm.name.$invalid">
+				<small style="color:red; display:block; text-align:center;">Enter a valid name</small>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="contactEmail">Email</label>
+			<input class="form-control" type="email" id="contactEmail" name="email" ng-model="contact.email" ng-required="true"/>
+			<div ng-show="contactForm.email.$touched && contactForm.email.$invalid">
+				<small style="color:red; display:block; text-align:center;">Enter a valid email</small>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="contactMessage">Your Message</label>
+			<textarea class="form-control form-rounded" rows="3" id="contactMessage" laceholder="Your Message" name="message" ng-model="contact.message" ng-required="true"></textarea>
+			<br>
+			<input class="btn btn-primary" type="submit" value="Send" ng-disabled="contactForm.$invalid" style="float: right"/>
+			<br><br>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,43 @@
+    <div class="container">
+        <img src="{{comImage}}" class="img-fluid" alt="Company Logo" style="width:auto;"/>
+        <hr>
+        <h3>{{comName}}</h3>
+        <hr>
+        <br><br>
+        <div style="float:right"><h5>Member since :{{comJoinDate}}</h5></div>
+        <br><hr>
+        <br><br>
+        <button type="submit" class="btn btn-primary btn-lg" style="float: right">Donate Capital</button>
+        <br><br><br>
+
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+          <h4>Currenting supported Causes/Charities :</h4>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="cc in compCausesCharities"><h6>{{cc}}</h6><div class="remove" ng-click="removeCauseCharity(cc)">x</div></li>
+            </ul>
+        </div>
+        <br>
+
+        <br>
+
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+        <fieldset class="form-group">
+          <h4>Choose Causes/Charities you want to support:</h4>
+          <hr>
+          <div ng-repeat="acc in allCausesCharities">
+             <div class="form-check">
+               <label class="form-check-label">
+                 <input type="checkbox" class="form-check-input" ng-checked="exists(acc, selected)" ng-click="addCauseCharity(acc)">
+                 {{ acc }}
+               </label>
+             </div>
+          </div>
+        </fieldset>
+      </div>
+      <br>
+      <hr>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Employees Participation Reports</button>
+      <br><br><br>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>
+      <br><br><br>
+    </div>

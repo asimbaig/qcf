@@ -1,0 +1,48 @@
+    <div class="container"  ng-app="myApp">
+        <img src="{{compLogo}}" class="img-fluid" alt="Company Logo" style="width:auto;"/>
+        <hr>
+        <img src="{{empImage}}" class="img-fluid" alt="Employee Picture" style="float: right; width:auto;"/>
+        <br><br><br><br><br><br><br><br><br>
+        <h3>Welcome : {{empName}}</h3>
+        <hr>
+        <div style="float:right"><h5>Employer :{{empCompany}}</h5></div>
+        <br><br>
+        <div style="float:right"><h5>Member since :{{empJoinDate}}</h5></div>
+        <br>
+        <hr>
+        <br><br>
+        <button type="submit" class="btn btn-primary btn-lg" style="float: right">Donate Cash</button>
+        <br><br><br>
+
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+          <h4>Currenting signed up Events and Programs:</h4>
+            <ul class="list-group">
+              <li class="list-group-item" ng-repeat="ep in eventsProgram"><h6>{{ep}}</h6><div class="remove" ng-click="removeEventProgram(ep)">x</div></li>
+            </ul>
+        </div>
+        <br>
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+          <fieldset class="form-group">
+            Choose from Upcoming Events and Programs
+            <hr>
+            <div ng-repeat="aep in avlEventsPrograms">
+               <div class="form-check">
+                 <label class="form-check-label">
+                   <input type="checkbox" class="form-check-input" ng-checked="exists(aep, selected)" ng-click="addEventProgram(aep, selected)">
+                   {{ aep }}
+                 </label>
+               </div>
+            </div>
+          </fieldset>
+        </div>
+        <br>
+        <br>
+
+
+      <br>
+      <hr>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Participation Reports</button>
+      <br><br><br>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>
+      <br><br><br>
+    </div>

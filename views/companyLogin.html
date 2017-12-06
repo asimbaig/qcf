@@ -1,0 +1,22 @@
+    <div class="container">
+        <br><br>
+        <h3>Welcome to Business Services</h3>
+        <hr>
+        <form ng-controller="comLoginController as comLogin" name="comLogin.upload_form">
+              <div class="form-group">
+                <label for="companyEmail">Email</label>
+                <input type="email" class="form-control" id="companyEmail"  ng-model="comLogin.data.comLoginEmail"/>
+              </div>
+              <div class="form-group">
+                <label for="companyPassword">Password</label>
+                <input type="password" class="form-control" id="companyPassword" ng-model="comLogin.data.comLoginPass"/>
+              </div>
+              <button type="submit"  ng-click="comLogin.submitLogin()" class="btn btn-primary" style="float: right">Login</button>
+              <br>
+              <a class="btn btn-link" href="#">Forgot password?</a>
+              <br>
+
+              <a class="btn btn-link" href="#!/companyRegister">Register</a>
+      </form>
+        <br><br><br>
+    </div>
