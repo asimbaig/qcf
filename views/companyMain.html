@@ -6,9 +6,10 @@
         <br><br>
         <div style="float:right"><h5>Member since :{{comJoinDate}}</h5></div>
         <br><hr>
-        <br><br>
-        <button type="submit" class="btn btn-primary btn-lg" style="float: right">Donate Capital</button>
-        <br><br><br>
+        <br>
+        <input type="image" src="data\donate-cash.png" style="float: right"/>
+        <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Donate Capital</button>-->
+        <br><br><br><br>
 
         <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
           <h4>Currenting supported Causes/Charities :</h4>
@@ -35,9 +36,49 @@
         </fieldset>
       </div>
       <br>
+      <div style="float:right; color:red"><h5>Employees Registration Code : {{employeeRegisterCode}}</h5></div>
+      <br>
       <hr>
-      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Employees Participation Reports</button>
-      <br><br><br>
-      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>
-      <br><br><br>
+      <div class="container">
+        <h3>{{comName}}'s Participating Employees</h3>
+
+        <div id="accordion">
+              <div ng-repeat="emp in allEmployees">
+                <div class="card">
+                  <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp.phone}}">
+                      {{emp.fullName}}  ({{emp.role}})                           Member since: <i>{{emp.joinDate}}</i><br>
+                      {{emp.email}}
+                    </a>
+                  </div>
+                  <div id="collapse{{emp.phone}}" class="collapse">
+                    <div class="card-body">
+                      <strong>Events and Programs signed up for</strong>
+                      <div ng-repeat="ep in emp.eventsProgram">
+                          <ul class="list-group">
+                            <li class="list-group-item">{{ep}}</li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div>
+        <button type="button" class="btn btn-link" ng-click="addEventProgram()">Add Event/Program</button>
+      </div>
+      <hr>
+      <br>
+      <h4>Reports</h4>
+      <hr>
+      <a href=""><img src="data\report1.jpg" class="rounded float-left" alt="Employees Participation Reports"></a>
+      <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Employees Participation Reports</button>-->
+
+      <a href=""><img src="data\report7.jpg" class="rounded float-right" alt="Charities/Causes Spending Reports"></a>
+      <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>-->
+      <br><br><br><br><br><br>
     </div>

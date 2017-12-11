@@ -1,7 +1,7 @@
 myApp.controller('mainController',['$scope','$http',function($scope,$http){
-			//localStorage.setItem("IsLogin",JSON.stringify({login:false}));
-			//alert(Date.now());
-			//alert(CalcService.square(5));
+			localStorage.setItem("companyName","");
+			localStorage.setItem("eventProgramFlag","false");
+
 			$http.get('data/news.json').then(function(response){
 						 $scope.newss = response.data;
 			});
@@ -17,7 +17,4 @@ myApp.controller('mainController',['$scope','$http',function($scope,$http){
 			$http.get('data/sstories.json').then(function(response){
 						 $scope.sstories = response.data;
 			});
-			/*$http.get('data/articles.json').then(function(response){
-						 $scope.articles = response.data;
-			});*/
 }]);

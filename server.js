@@ -2,11 +2,13 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 
-var employeeServerController = require('./server/controllers/employeeServerController');
 var companiesServerController = require('./server/controllers/companiesServerController');
+var employeeServerController = require('./server/controllers/employeeServerController');
 
 var eventProgramServerController = require('./server/controllers/eventProgramServerController');
 var causeCharityServerController = require('./server/controllers/causeCharityServerController');
+
+var loginServerController = require('./server/controllers/loginServerController');
 
 app.use(function(req, res, next) { //allow cross origin requests
     res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
@@ -23,6 +25,7 @@ companiesServerController(app);
 employeeServerController(app);
 eventProgramServerController(app);
 causeCharityServerController(app);
+loginServerController(app);
 
 /*
 app.get('*',function(req,res){

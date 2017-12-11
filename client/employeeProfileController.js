@@ -3,10 +3,8 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 
 				$scope.empImage = employeeData.profilePicture;
 				$scope.empName = employeeData.fullName ;
-				$scope.empCompany = employeeData.company;
 				$scope.eventsProgram = employeeData.eventsProgram;
 				$scope.empJoinDate =  employeeData.joinDate;
-
 				var companyChartiresCauses;
 
 				$http({
@@ -15,22 +13,24 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 						data: employeeData
 				}).then(function (httpResponse) {
 						$scope.compLogo = httpResponse.data.logoPicture;
-
-						//companyChartiresCauses = httpResponse.data.causesCharities;
-				});
+						$scope.empCompany = httpResponse.data.companyName;
+				},
+					function(response) {
+							// failure callback,handle error here
+							if(response.status==400){
+									console.log(response.data.message);
+							}
+					});
 
 				$http({
 						 url: '/loadAvailableEvtProg',
 						 method: 'POST',
-						 data: {companyName:employeeData.company}
+						 data: {empRegisterCode:employeeData.empRegisterCode}
 				 }).then(function (httpResponse) {
-					 //var tempObj = JSON.stringify(httpResponse);
-					 //console.log("allEventProgram>>>>>><<<<<<< " + tempObj);
 					 var tempArray = [];
 					 	for(var t in httpResponse.data){
 						 				tempArray.push(httpResponse.data[t].title);
 					 	}
-						//console.log("allEventProgram----tempArray  >>>>>><<<<<<< " + tempArray);
 						for(var i in tempArray){
 								for(var j in employeeData.eventsProgram){
 										if(tempArray[i]===employeeData.eventsProgram[j]){
@@ -39,32 +39,30 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 								}
 						}
 					 	 $scope.avlEventsPrograms = tempArray;
-				 });
+				 },
+					 function(response) {
+							 // failure callback,handle error here
+							 if(response.status==400){
+									 console.log(response.data.message);
+							 }
+			});
 
-				/*$http.get('/loadEvents').then(function(response){
-							$scope.avlEventsPrograms = response.data;
-							console.log("loadEvents-> "+JSON.stringify( response.data));
-				});*/
-
-				$scope.removeEventProgram=function(ep){
-
-						console.log(ep);
-	 				 var temp = {fullName:employeeData.fullName, eventProgram:ep };
+			$scope.removeEventProgram=function(ep){
+ 				 var temp = {fullName:employeeData.fullName, eventProgram:ep };
 	 				 $http({
 	 						 url: '/RemoveEventProgram',
 	 						 method: 'POST',
 	 						 data: temp
 	 				 }).then(function (httpResponse) {
-	 					 		//console.log("In remove response");
-
-	 							//var tempObj = JSON.stringify(httpResponse);
-
-	 								//console.log("tempObj " + tempObj);
-	 								//console.log("httpResponse.data.eventsProgram :"+httpResponse.data.eventsProgram);
-
 	 								$scope.eventsProgram = httpResponse.data.eventsProgram;
 									$scope.avlEventsPrograms.push(ep);
-	 					});
+	 					},
+	 					 function(response) {
+	 							 // failure callback,handle error here
+	 							 if(response.status==400){
+	 									 console.log("Something went wrong while removing Event/Program");
+	 							 }
+	 					 });
 				};
 
 				$scope.selected = [];
@@ -82,25 +80,23 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 
 				$scope.addEventProgram = function(item){
  				 toggle(item,$scope.selected);
- 				 //console.log(employeeData.fullName+" >>>>>>>>>>>>>>>ITEM in AngJs>>>>>>>>>>>>>>>>>>>>>> "+item);
  				 var temp = {fullName:employeeData.fullName, eventProgram:item };
  				 $http({
  						 url: '/addEventProgram',
  						 method: 'POST',
  						 data: temp
  				 }).then(function (httpResponse) {
- 					 		//console.log("In add response");
-
- 							//var tempObj = JSON.stringify(httpResponse);
-
- 								//console.log("tempObj " + tempObj);
- 								//console.log("httpResponse.data.eventsProgram :"+httpResponse.data.eventsProgram);
-
  								$scope.eventsProgram = httpResponse.data.eventsProgram;
 								var index = $scope.avlEventsPrograms.indexOf(item);
 								if (index > -1) {
 								    $scope.avlEventsPrograms.splice(index, 1);
 								}
- 					});
+ 					},
+ 					 function(response) {
+ 							 // failure callback,handle error here
+ 							 if(response.status==400){
+ 									 console.log("Something went wrong while adding Event/Program.");
+ 							 }
+ 					 });
    		 };
 }]);

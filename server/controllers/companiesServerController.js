@@ -17,7 +17,9 @@ var companySchema = new mongoose.Schema({
   joinDate:Date,
   active:Boolean,
   causesCharities:[String],
-  details: String
+  details: String,
+  regCode: String,
+  empRegisterCode: String
 });
 
 var Company = mongoose.model('Companies',companySchema);
@@ -29,14 +31,7 @@ module.exports = function(app){
           cb(null, './uploads/');
       },
       filename: function (req, file, cb) {
-          var datetimestamp = Date.now();
-          var saveFile; //= file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
-          saveFile = file.fieldname + '-' +file.originalname;
-          cb(null, saveFile);
-          //console.log("filename: "+ file.fieldname);
-          //console.log("originalname: "+file.originalname);
-          //savedFile = __dirname+ "\\uploads\\" + saveFile;
-          //console.log("saveFile: "+ __dirname+ "\\uploads\\" + saveFile);
+          cb(null, file.fieldname + '-' +file.originalname);
       }
   });
 
@@ -44,19 +39,22 @@ module.exports = function(app){
                   storage: storage
               }).single('file');
 
-  app.post('/upload', function(req, res) {
+  app.post('/uploadcomp', function(req, res) {
       upload(req,res,function(err){
           if(err){
                console.log(err);
                res.json({error_code:1,err_desc:err});
                return;
           }
-           res.json({error_code:0,err_desc:null});
+          res.json({
+            error_code:0,
+            err_desc:null,
+            fileName:req.file.filename
+          });
       });
   });
 
   app.post('/comReg', function(req, res, next) {
-    //console.log("}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}"+req.body.logoPicture);
     var com= new Company;
         com.companyName = req.body.comName;
         com.logoPicture = req.body.logoPicture;
@@ -68,64 +66,49 @@ module.exports = function(app){
         com.active = true;
         com.causesCharities=req.body.causesCharities;
         com.details = req.body.details;
+        com.regCode = req.body.regCode;
+        com.empRegisterCode = req.body.empRegisterCode;
         com.save(function(err,data){
   				          if(err){
                       console.log(err);
                       throw err;
                     }
-                    //console.log(data);
-  				          //res.send('Company Saved.');
                     return res.json(data);
 			           });
   });
 
-
-  app.post('/comLogin',function(req,res){
-      Company.findOne({email: req.body.comLoginEmail,password: req.body.comLoginPass})
-              .exec(function(err,result){
-
-                if(result){
-                    //console.log("result :>>>>>>>>>>>>>>>>>>>>>"+result);
-                    return res.json(result);
-                }else{
-                  console.log("No result");
-                }
-
-              });
-      });
-      app.get('/loadCompanies',function(req,res){
-
+  app.get('/loadCompanies',function(req,res){
           Company.find({})
                   .exec(function(err,result){
                     if(result){
-                        //console.log("result :>->->->->-->->>->->->>->->->->>-->>-->>"+result);
                         return res.json(result);
                     }else{
-                      console.log("No result");
+                      return res.status(400).send({
+                             message: 'No records found.'
+                          });
                     }
 
                   });
           });
 
-          app.post('/fetchCompany',function(req,res){
-              Company.findOne({companyName: req.body.company})
+  app.post('/fetchCompany',function(req,res){
+            console.log("empRegisterCode-<<<"+req.body.empRegisterCode);
+              Company.findOne({empRegisterCode: req.body.empRegisterCode})
                       .exec(function(err,result){
-
                         if(result){
-                            //console.log("result :>>>>>>>>>company>>>>>>>>>>>>"+result);
                             return res.json(result);
                         }else{
-                          console.log("No result");
+                          return res.status(400).send({
+                                 message: 'No records found.'
+                              });
                         }
 
                       });
-              });
-          app.post('/RemoveCauseCharity',function(req,res){
+    });
+    app.post('/RemoveCauseCharity',function(req,res){
                   Company.findOne({companyName: req.body.compName})
                           .exec(function(err,result){
                                 if(result){
-                                    //console.log("result :>>>>>>>>>companyRemove>>>>>>>>>>>>"+result);
-
                                     var tempData;
                                     var temp = result.causesCharities;
                                     var index = temp.indexOf(req.body.causeCharity);
@@ -133,8 +116,6 @@ module.exports = function(app){
                                     if (index > -1) {
                                         temp.splice(index, 1);
                                     }
-                                    //console.log("result :>>>>>>>>>companyRemoveAfter>>>>>>>>>>>>"+temp);
-
                                     Company.findOneAndUpdate({companyName: req.body.compName}, {$set:{causesCharities:temp}}, {new: true}, function(err, doc){
                                                 if(err){
                                                     console.log("Something wrong when updating data!");
@@ -144,37 +125,46 @@ module.exports = function(app){
                                                  return res.json(tempData);
                                      });
                                 }else{
-                                    console.log("No result");
+                                  return res.status(400).send({
+                                         message: 'No records found.'
+                                      });
                                 }
                         });
-          });
-          app.post('/addCauseCharity',function(req,res){
+    });
+    app.post('/addCauseCharity',function(req,res){
                   Company.findOne({companyName: req.body.compName})
                           .exec(function(err,result){
                                 if(result){
-                                    //console.log("result :>>>>>>>>>companyRemove>>>>>>>>>>>>"+result);
-
                                     var tempData;
                                     var temp = result.causesCharities;
                                     var index = temp.indexOf(req.body.causeCharity);
 
                                     if (index === -1) {
                                         temp.push(req.body.causeCharity);
-                                        //temp.splice(index, 1);
                                     }
-                                    //console.log("result :>>>>>>>>>companyRemoveAfter>>>>>>>>>>>>"+temp);
-
                                     Company.findOneAndUpdate({companyName: req.body.compName}, {$set:{causesCharities:temp}}, {new: true}, function(err, doc){
                                                 if(err){
                                                     console.log("Something wrong when updating data!");
                                                 }
-                                                //tempData = doc;
-                                                console.log("tempData :"+doc);
                                                  return res.json(doc);
                                      });
                                 }else{
-                                    console.log("No result");
+                                  return res.status(400).send({
+                                         message: 'No records found.'
+                                      });
                                 }
                         });
-          });
+    });
+    app.post('/companysCharities',function(req,res){
+                  Company.findOne({companyName: req.body.companyName})
+                          .exec(function(err,result){
+                                if(result){
+                                     return res.json(result);
+                                }else{
+                                  return res.status(400).send({
+                                         message: 'No records found.'
+                                      });
+                                }
+                        });
+    });
 };

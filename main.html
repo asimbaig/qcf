@@ -10,13 +10,11 @@
 <script src="client\lib\angular-route.min.js"></script>
 
 <script type="text/javascript" src="node_modules\ng-file-upload\dist\ng-file-upload.min.js"></script>
-
 <script src="client\mainApp.js"></script>
 <script src="client\LoginController.js"></script>
 <script src="client\LogoutController.js"></script>
 <script src="client\MainAppController.js"></script>
 <script src="client\headerController.js"></script>
-
 
 <script src="client\eventProgramController.js"></script>
 <script src="client\causeCharityController.js"></script>
@@ -28,11 +26,10 @@
 <script src="client\mainController.js"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
-
 <link href="assets\css\style.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
 <link href="node_modules\angularjs-datepicker\src\css\angular-datepicker.css" rel="stylesheet" type="text/css" />
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -43,39 +40,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
- <style>
-     h3,h4{font-family: 'Berkshire Swash', cursive; color:#C10013;}
- </style>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<style>
+    h3,h4{font-family: 'Berkshire Swash', cursive; color:#C10013;}
+</style>
 </head>
-  <body>
-    <div class="container">
-        <br><br>
-        <img src="data\Quartet-logo.png" class="rounded mx-auto d-block" alt="Quartet Community Foundation">
-        <br><br>
-        <h3>Welcome</h3>
-        <hr>
-        <form ng-controller="LoginController as LoginCont" name="LoginCont.upload_form">
-              <div class="form-group">
-                <label for="Email">Email</label>
-                <input type="email" class="form-control" id="Email"  ng-model="LoginCont.data.LoginEmail"/>
-              </div>
-              <div class="form-group">
-                <label for="Password">Password</label>
-                <input type="password" class="form-control" id="Password" ng-model="LoginCont.data.LoginPass"/>
-              </div>
-              <div style="color:red;">{{message}}</div>
-              <button type="submit"  ng-click="LoginCont.submitLogin()" class="btn btn-primary" style="float: right">Login</button>
-              <br>
-              <a class="btn btn-link" href="#">Forgot password?</a>
-              <br>
-              <a class="btn btn-link" href="" ng-click="LoginCont.submitRegCompany()">Register as Company</a>
-              <br>
-              <a class="btn btn-link" href="" ng-click="LoginCont.submitRegEmployee()">Register as Employee</a>
-      </form>
-        <br><br><br>
-    </div>
+<body style="padding-top:50px">
 
-  </body>
+<header ng-include="'header.html'"></header>
+
+<main ng-view></main>
+
+<div class="jumbotron">
+		<div class="col-md-12" style="color:#fff">
+			© Quartet Community Foundation<br>
+			Royal Oak House, Royal Oak Avenue, Bristol, BS1 4GB<br>
+			0117 989 7700<br>
+			info@quartetcf.org.uk<br>
+			Registered Charity Number 1080418
+		</div>
+		<div class="col-md-12" style="color:#fff">
+			<strong>Follow us here</strong><hr>
+		</div>
+			<div class="col-md-12">
+                    <ul class="social-network social-circle">
+                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+			</div>
+	</div>
+</body>
 </html>

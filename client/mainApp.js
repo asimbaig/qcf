@@ -2,6 +2,22 @@ var myApp = angular.module('myApp',['ngRoute','ngFileUpload','720kb.datepicker']
 
 myApp.config(['$routeProvider',function($routeProvider){
 	$routeProvider
+	.when('/Login',{
+		templateUrl: '/index.html',
+		controller: 'LoginController'
+	})
+	.when('/Logout',{
+		templateUrl: '/logout.html',
+		controller: 'LogoutController'
+	})
+	.when('/header',{
+		templateUrl: '/header.html',
+		controller: 'headerController'
+	})
+	.when('/main',{
+		templateUrl: 'main.html',
+		controller: 'MainAppController'
+	})
 	.when('/home',{
 		templateUrl: 'views/home.html',
 		controller: 'mainController',
@@ -11,24 +27,16 @@ myApp.config(['$routeProvider',function($routeProvider){
 		templateUrl: 'views/aboutUs.html',
 		controller: 'mainController'
 	})
-	.when('/employeeLogin',{
-		templateUrl: 'views/employeeLogin.html',
-		controller: 'empLoginController'
-	})
 	.when('/employeeRegister',{
-		templateUrl: 'views/employeeRegister.html',
+		templateUrl: 'employeeRegister.html',
 		controller: 'employeeController'
 	})
 	.when('/employeeMain',{
 		templateUrl: 'views/employeeMain.html',
 		controller: 'employeeProfileController'
 	})
-	.when('/companyLogin',{
-		templateUrl: 'views/companyLogin.html',
-		controller: 'comLoginController'
-	})
 	.when('/companyRegister',{
-		templateUrl: 'views/companyRegister.html',
+		templateUrl: 'companyRegister.html',
 		controller: 'companyController'
 	})
 	.when('/companyMain',{
@@ -58,27 +66,23 @@ myApp.config(['$routeProvider',function($routeProvider){
 }]);
 
 myApp.service('FileService', ['Upload','$window',function(Upload,$window){
-            this.upload = function (file) {
-				        Upload.upload({
-				            url: '/upload', //webAPI exposed to upload the file
+            this.upload = function (file,http_url) {
+								Upload.upload({
+				            url: http_url, //webAPI exposed to upload the file
 				            data:{file:file} //pass file as data, should be user ng-model
 				        }).then(function (resp) { //upload function returns a promise
 				            if(resp.data.error_code === 0){ //validate success
-				                $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+												localStorage.setItem("filename","uploads\\"+resp.data.fileName);
+												alert('Successfully Register. ');
 				            } else {
 				                $window.alert('an error occured');
 				            }
 				        }, function (resp) { //catch error
 				            $window.alert('Error status: ' + resp.status);
 				        }, function (evt) {
-				            /*console.log(evt);
-				            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-				            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-				            progress = 'progress: ' + progressPercentage + '% '; // capture upload progress*/
 				        });
 				    };
 }]);
-
 
 myApp.run(function(){
 });
