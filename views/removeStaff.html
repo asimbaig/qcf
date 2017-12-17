@@ -1,0 +1,24 @@
+<div class="container">
+  <br><br>
+  <H3>Remove Staff member</H3>
+  <div id="accordion">
+        <div ng-repeat="stf in allStaff">
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{stf._id}}" style="color:blue; cursor: pointer;">
+                    {{stf.email}}
+              </a>
+              <div class="remove_emp" ng-click="removeStaff(stf.email)" style="float:right; color:red">x</div>
+            </div>
+            <div id="collapse{{stf._id}}" class="collapse">
+              <div class="card-body">
+                <strong>Role: </strong>{{stf.role}}
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+  </div>
+  <br><br>
+</div>

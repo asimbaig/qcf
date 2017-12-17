@@ -1,0 +1,67 @@
+<div  ng-controller="adminHeaderController">
+<nav class="navbar navbar-toggleable-md bg-success navbar-inverse fixed-top">
+       <div class="container">
+           <button class="navbar-toggler" data-toggle="collapse" data-target="#mainNav">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="mainNav">
+
+             <div class="navbar-nav">
+                 <a class="nav-item nav-link" href="adminHome.html">Home</a>
+                 <a class="nav-item nav-link" href="#!/contact">Contact Us</a>
+
+                 <div class="nav-item dropdown" ng-show="{{addUser}}">
+                   <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuStaff" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Manage Staff
+                   </a>
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuStaff">
+                     <a class="dropdown-item" href="#!/registerStaff">Add Staff</a>
+                     <a class="dropdown-item" href="#!/removeStaff">Remove Staff</a>
+                   </div>
+                 </div>
+
+
+             </div>
+               <ul class="navbar-nav ml-auto" ng-show="{{managers}}">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuCharity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cause/Charity
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuCharity">
+                    <a class="dropdown-item" href="#!/causeCharity">Add Cause/Charity</a>
+                    <a class="dropdown-item" href="#!/removeCauseCharity">Remove Cause/Charity</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuEvent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Event/Program
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuEvent">
+                    <a class="dropdown-item" href="#!/eventProgram">Add Event/Program</a>
+                    <a class="dropdown-item" href="#!/removeEventProgram">Remove Event/Program</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuCompany" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Companies
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuCompany">
+                    <a class="dropdown-item" href="#!/removeCompany">Remove Company</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuEmployee" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Employees
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuEmployee">
+                    <a class="dropdown-item" href="#!/removeEmployee">Remove Employee</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link"  href="" ng-click="logout()">Logout</a>
+                </li>
+              </ul>
+           </div>
+       </div>
+   </nav>
+</div>

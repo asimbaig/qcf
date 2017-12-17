@@ -3,22 +3,19 @@
     <div class="row">
 
           <ul class="nav nav-tabs flex-wrap" role="tablist">
-              <li class="nav-item">
+              <li class="nav-item" style="background-color:#A3E4D7;">
                 <a class="nav-link" href="#newsTab" role="tab" data-toggle="tab" ng-click="mc.addNews()">News</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="background-color:#F9E79F;">
                 <a class="nav-link" href="#eventsTab" role="tab" data-toggle="tab" ng-click="mc.addEvents()">Events/Programs</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="background-color:#C39BD3;">
                 <a class="nav-link" href="#charityTab" role="tab" data-toggle="tab" ng-click="mc.addCharity()">Charities/Causes</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" style="background-color:#FADBD8;">
                 <a class="nav-link" href="#succesStoriesTab" role="tab" data-toggle="tab" ng-click="mc.addSStories()">Success Stories</a>
               </li>
-              <!--<li class="nav-item">
-                <a class="nav-link" href="#articlesTab" role="tab" data-toggle="tab" ng-click="mc.addArticles()">Helping Articles</a>
-              </li>-->
-              <li class="nav-item">
+              <li class="nav-item" style="background-color:#85C1E9;">
                 <a class="nav-link" href="#businessTab" role="tab" data-toggle="tab" ng-click="mc.addPartners()">Our Sponsors</a>
               </li>
           </ul>
@@ -29,7 +26,7 @@
                     <div ng-repeat="n in newss">
                     <div class="card">
                       <div class="card-block">
-                        <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                        <div style="background-color:#A3E4D7; padding:2em; text-align: center;">
                             <strong class="card-title">{{n.title}}</strong>
                             <p class="card-text"><i>Published on : {{n.published}}</i></p>
                         </div>
@@ -45,7 +42,7 @@
                     <div ng-repeat="e in events">
                       <div class="card">
                         <div class="card-block">
-                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                          <div style="background-color:#F9E79F; padding:1em; text-align: center;">
                               <p><strong class="card-title">{{e.title}}</strong></p>
                               <p><strong class="card-title">{{e.CauseCharity}}</strong></p>
                               <p><strong class="card-title">{{e.date}}</strong></p>
@@ -65,7 +62,7 @@
                     <div ng-repeat="c in charity">
                       <div class="card">
                         <div class="card-block">
-                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                          <div style="background-color:#C39BD3; padding:1em; text-align: center;">
                               <p><strong class="card-title">{{c.title}}</strong></p>
                               <p><strong class="card-title">{{c.causeType}}</strong></p>
                           </div>
@@ -82,7 +79,7 @@
                     <div ng-repeat="s in sstories">
                       <div class="card">
                         <div class="card-block">
-                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                          <div style="background-color:#FADBD8; padding:1em; text-align: center;">
                               <strong class="card-title">{{s.title}}</strong>
                               <p class="card-text"><i>Published on : {{s.published}}</i></p>
                           </div>
@@ -98,7 +95,7 @@
                     <div ng-repeat="p in partners">
                       <div class="card">
                         <div class="card-block">
-                          <div style="background-color:#D3D3D3; padding:1em; text-align: center;">
+                          <div style="background-color:#85C1E9; padding:1em; text-align: center;">
                               <strong class="card-title">{{p.companyName}}</strong>
                           </div>
                           <img ng-src="{{p.logoPicture}}" alt="{{p.companyName}}">

@@ -12,19 +12,31 @@
     cursor: pointer;
     margin-left: 10px;
   }
+  .remove_emp{
+      float: right;
+      padding: 5px;
+      //background: #fff;
+      width: 18px;
+      text-align: center;
+      border-radius: 20px;
+      color: crimson;
+      cursor: pointer;
+      margin-left: 10px;
+    }
 
 .nav-tabs {
     //background-color: #808080 !important;
+    border: medium;
 }
 .nav-tabs>li>a {
-    background-color: #808080 !important;
-    color: #fff;
+    //background-color: #808080 !important;
+    color: #000;
 }
 .nav-tabs > li > a:hover{
     background-color: #D3D3D3 !important;
     border: medium;
     //border-radius: 0;
-    color:#fff;
+    color:red;
 }
 .nav-tabs>li.active>a {
     background-color: white !important;

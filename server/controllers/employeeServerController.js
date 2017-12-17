@@ -1,11 +1,16 @@
+/*
+    Its server-end controller which handles all ajax http calls related to Employees.
+*/
+//importing node modules express, and body-parser
 var bodyParser = require("body-parser");
 var multer = require('multer');
 var mongoose = require('mongoose');
+var fs = require('fs-extra');
 
 //connect to database
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://test:test@ds113586.mlab.com:13586/quartetdb', { useMongoClient: true });
-//create schema - this like blueprint
+//create schema for Employees- this like blueprint
 var employeeSchema = new mongoose.Schema({
     fullName:String,
     profilePicture:String,
@@ -20,32 +25,50 @@ var employeeSchema = new mongoose.Schema({
     role: String,
     empRegisterCode: String
 });
-
+//creating object of Employees model
 var Employee = mongoose.model('Employees',employeeSchema);
+//creating object of Companies model
 var Company = mongoose.model('Companies');
 
 module.exports = function(app){
+
+  //Finding a company for particular Employee-Registration-Code
   app.post('/empRegCode',function(req,res){
+            var tempEmail = req.body.empEmail;
+
       Company.findOne({empRegisterCode: req.body.regCode}).lean()
               .exec(function(err,result){
                 if(result){
-                    result.flag = "true";
-                    return res.send(result);
+                    Employee.findOne({email: tempEmail}).lean()
+                            .exec(function(err,result2){
+                                  if(result2){
+                                        result.flag = "false";
+                                        return res.status(400).send({
+                                           message: 'Wrong Registration Code or Email address already exist,Try Again.'
+                                        });
+                                  }else{
+                                        result.flag = "true";
+                                        return res.json(result);
+
+                                  }
+                          });
+
                 }else{
-                  return res.status(400).send({
-                         message: 'No records found.'
-                      });
+
                 }
 
               });
   });
-  var savedFile;
+
+  //Storing uploaded image file at server
   var storage = multer.diskStorage({ //multers disk storage settings
       destination: function (req, file, cb) {
           cb(null, './uploads/');
       },
       filename: function (req, file, cb) {
-          cb(null, file.fieldname + '-' +file.originalname);
+        var datetimestamp = Date.now();
+        var saveFile = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+          cb(null, saveFile);
       }
   });
 
@@ -63,11 +86,13 @@ module.exports = function(app){
           res.json({
             error_code:0,
             err_desc:null,
-            fileName:req.file.filename
+            fileName:req.file.filename,
+            originalName:req.file.originalname
           });
       });
   });
 
+  //Saving new Employee to Database.
   app.post('/empReg', function(req, res, next) {
         var emp = new Employee;
         emp.fullName = req.body.empName;
@@ -90,6 +115,8 @@ module.exports = function(app){
                     return res.json(data);
 			           });
   });
+
+  //Removing Event/Program for particular Employee And updating record
   app.post('/RemoveEventProgram',function(req,res){
               Employee.findOne({fullName: req.body.fullName})
                       .exec(function(err,result){
@@ -115,6 +142,8 @@ module.exports = function(app){
                             }
                     });
       });
+
+      //Adding Event/Program for particular Employee And updating record
       app.post('/addEventProgram',function(req,res){
               Employee.findOne({fullName: req.body.fullName})
                       .exec(function(err,result){
@@ -140,7 +169,7 @@ module.exports = function(app){
                             }
                     });
       });
-
+      //Finding a employee for particular Employee-Registration-Code(Company)
       app.post('/thisCompanyEmployees',function(req,res){
               Employee.find({empRegisterCode: req.body.empRegisterCode})
                       .exec(function(err,result){
@@ -153,4 +182,91 @@ module.exports = function(app){
                             }
                     });
       });
+      app.post('/RemoveEmp',function(req,res){
+            fs.remove(req.body.profilePicture, err => {
+                        if (err) return console.error(err);
+                        Employee.remove({email: req.body.email}, function(err) {
+                            if (!err) {
+                                    return res.status(200).send({
+                                           message: 'record deleted'
+                                        });
+
+                            }
+                            else {
+                                    //message.type = 'Error while deleting Employee';
+                                    return res.status(400).send({
+                                           message: 'Record not deleted.'
+                                        });
+                            }
+                        });
+
+                      });
+      });
+
+      //Load all Employees' record
+      app.get('/getAllEmployees',function(req,res){
+
+          Employee.find({})
+                  .exec(function(err,result){
+                    if(result){
+                        return res.json(result);
+                    }else{
+                      return res.status(400).send({
+                             message: 'No records found.'
+                          });
+                    }
+                  });
+        });
+
+        app.post('/RemoveComp',function(req,res){
+
+                fs.remove(req.body.logoPicture, err => {
+                          if (err) return console.error(err);
+                          Employee.find({empRegisterCode: req.body.empRegisterCode})
+                                  .exec(function(err,result){
+                                        if(result){
+                                          for(var t in result){
+                                            fs.remove(result[t].profilePicture, err => {
+                                                        if (err) return console.error(err);
+                                                        Employee.remove({email: result[t].email}, function(err) {
+                                                            if (!err) {
+
+
+                                                            }
+                                                            else {
+                                                                    //message.type = 'Error while deleting Employee';
+                                                                    return res.status(400).send({
+                                                                           message: 'Record not deleted.'
+                                                                        });
+                                                            }
+                                                        });
+
+                                                      });
+                                          }
+
+
+                                        }else{
+                                              return res.status(400).send({
+                                                 message: 'Record not deleted.'
+                                              });
+                                        }
+                                });
+                              //////////////////////
+                              Company.remove({email: req.body.email}, function(err) {
+                                  if (!err) {
+                                          return res.status(200).send({
+                                                 message: 'record deleted'
+                                              });
+
+                                  }
+                                  else {
+                                          //message.type = 'Error while deleting Employee';
+                                          return res.status(400).send({
+                                                 message: 'Record not deleted.'
+                                              });
+                                  }
+                              });
+                        });
+        });
+
 };

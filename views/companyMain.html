@@ -7,8 +7,8 @@
         <div style="float:right"><h5>Member since :{{comJoinDate}}</h5></div>
         <br><hr>
         <br>
-        <input type="image" src="data\donate-cash.png" style="float: right"/>
-        <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Donate Capital</button>-->
+        <input type="image" src="data\donate-cash.png" style="float: right"  data-toggle="modal" data-target="#myModal"/>
+
         <br><br><br><br>
 
         <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
@@ -36,7 +36,7 @@
         </fieldset>
       </div>
       <br>
-      <div style="float:right; color:red"><h5>Employees Registration Code : {{employeeRegisterCode}}</h5></div>
+      <div style="float:right; color:red"><h5>Employee Registration Code : {{employeeRegisterCode}}</h5></div>
       <br>
       <hr>
       <div class="container">
@@ -46,12 +46,13 @@
               <div ng-repeat="emp in allEmployees">
                 <div class="card">
                   <div class="card-header">
-                    <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp.phone}}">
-                      {{emp.fullName}}  ({{emp.role}})                           Member since: <i>{{emp.joinDate}}</i><br>
+                    <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
+                      {{emp.fullName}}  ({{emp.role}})                           <span style="float:right; color:green">Member since: <i>{{emp.joinDate}}</i></span><br>
                       {{emp.email}}
                     </a>
+                    <div class="remove_emp" ng-click="removeEmployee(emp.fullName,emp.email,emp.profilePicture)" style="float:right; color:red">x</div>
                   </div>
-                  <div id="collapse{{emp.phone}}" class="collapse">
+                  <div id="collapse{{emp._id}}" class="collapse">
                     <div class="card-body">
                       <strong>Events and Programs signed up for</strong>
                       <div ng-repeat="ep in emp.eventsProgram">
@@ -75,10 +76,76 @@
       <br>
       <h4>Reports</h4>
       <hr>
-      <a href=""><img src="data\report1.jpg" class="rounded float-left" alt="Employees Participation Reports"></a>
-      <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Employees Participation Reports</button>-->
+      <input type="image" src="data\report1.jpg" class="rounded float-left" alt="Employees Participation Reports"/>
+      <!--<a href=""><img src="data\report1.jpg" class="rounded float-left" alt="Employees Participation Reports"></a>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Employees Participation Reports</button>-->
 
-      <a href=""><img src="data\report7.jpg" class="rounded float-right" alt="Charities/Causes Spending Reports"></a>
-      <!--<button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>-->
+      <input type="image" src="data\report7.jpg" class="rounded float-right" alt="Employees Participation Reports"/>
+      <!--<a href=""><img src="data\report7.jpg" class="rounded float-right" alt="Charities/Causes Spending Reports"></a>
+      <button type="submit" class="btn btn-primary btn-lg" style="float: right">Charities/Causes Spending Reports</button>-->
       <br><br><br><br><br><br>
     </div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Make Cash Donation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
+        <div class="form-group">
+            <label for="CC">Select Cause/Charity</label>
+            <select class="form-control" id="CC" ng-model="causeCharity">
+              <option ng-repeat="cc in compCausesCharities" value="{{cc}}">{{cc}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+              <label for="paymentType">Payment Type</label>
+              <select class="form-control" id="paymentType" required>
+                  <option value="one-Off">One-Off</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+              </select>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="text" class="form-control" id="amount"placeholder="0.0"/>
+        </div>
+        <div class="form-group">
+          <label for="comapnyName">Company</label>
+          <input type="text" class="form-control" id="companyName"/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email"/>
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">Debt/Credit Card Number</label>
+          <input type="text" class="form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX"/>
+        </div>
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date</label>
+          <input type="text" class="form-control" id="expiryDate" placeholder="mm/yy"/>
+        </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

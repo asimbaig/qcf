@@ -1,0 +1,29 @@
+  <div class="container">
+    <br><br>
+    <H3>Remove Employees</H3>
+    <div id="accordion">
+          <div ng-repeat="emp in allEmployees">
+            <div class="card">
+              <div class="card-header">
+                <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
+                  {{emp.fullName}}  ({{emp.role}})                           <span style="float:right; color:green">Member since: <i>{{emp.joinDate}}</i></span><br>
+                  {{emp.email}}
+                </a>
+                <div class="remove_emp" ng-click="removeEmployee(emp.fullName,emp.email,emp.profilePicture)" style="float:right; color:red">x</div>
+              </div>
+              <div id="collapse{{emp._id}}" class="collapse">
+                <div class="card-body">
+                  <strong>Events and Programs signed up for</strong>
+                  <div ng-repeat="ep in emp.eventsProgram">
+                      <ul class="list-group">
+                        <li class="list-group-item">{{ep}}</li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+    </div>
+    <br><br>
+  </div>

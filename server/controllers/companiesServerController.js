@@ -1,12 +1,13 @@
+/*
+    Its server-end controller which handles all ajax http calls related to Companies.
+*/
+//importing node modules express, and body-parser
 var bodyParser = require("body-parser");
 var multer = require('multer');
 var mongoose = require('mongoose');
+var fs = require('fs-extra');
 
-//connect to database
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://test:test@ds113586.mlab.com:13586/quartetdb', { useMongoClient: true });
-
-//create schema - this like blueprint
+//create schema for Companies - this like blueprint
 var companySchema = new mongoose.Schema({
   companyName:String,
   logoPicture:String,
@@ -22,16 +23,24 @@ var companySchema = new mongoose.Schema({
   empRegisterCode: String
 });
 
+//creating object of Companies model
 var Company = mongoose.model('Companies',companySchema);
 
+//connect to database
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://test:test@ds113586.mlab.com:13586/quartetdb', { useMongoClient: true });
+
 module.exports = function(app){
-  var savedFile;
+
+  //Storing uploaded image file at server
   var storage = multer.diskStorage({ //multers disk storage settings
       destination: function (req, file, cb) {
           cb(null, './uploads/');
       },
       filename: function (req, file, cb) {
-          cb(null, file.fieldname + '-' +file.originalname);
+        var datetimestamp = Date.now();
+        var saveFile = file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1];
+          cb(null, saveFile);
       }
   });
 
@@ -49,11 +58,13 @@ module.exports = function(app){
           res.json({
             error_code:0,
             err_desc:null,
-            fileName:req.file.filename
+            fileName:req.file.filename,
+            originalName:req.file.originalname
           });
       });
   });
 
+  //Saving new Company to Database.
   app.post('/comReg', function(req, res, next) {
     var com= new Company;
         com.companyName = req.body.comName;
@@ -77,6 +88,7 @@ module.exports = function(app){
 			           });
   });
 
+  //Load record of all Companies
   app.get('/loadCompanies',function(req,res){
           Company.find({})
                   .exec(function(err,result){
@@ -89,10 +101,10 @@ module.exports = function(app){
                     }
 
                   });
-          });
+  });
 
+  //Finding a company with particular Employee-Registration-Code
   app.post('/fetchCompany',function(req,res){
-            console.log("empRegisterCode-<<<"+req.body.empRegisterCode);
               Company.findOne({empRegisterCode: req.body.empRegisterCode})
                       .exec(function(err,result){
                         if(result){
@@ -105,6 +117,8 @@ module.exports = function(app){
 
                       });
     });
+
+    //Removing Cause/Charity for particular Company and updating record.
     app.post('/RemoveCauseCharity',function(req,res){
                   Company.findOne({companyName: req.body.compName})
                           .exec(function(err,result){
@@ -121,7 +135,6 @@ module.exports = function(app){
                                                     console.log("Something wrong when updating data!");
                                                 }
                                                 tempData = doc;
-                                                console.log("tempData :"+tempData);
                                                  return res.json(tempData);
                                      });
                                 }else{
@@ -131,6 +144,8 @@ module.exports = function(app){
                                 }
                         });
     });
+
+    //Adding Cause/Charity for particular Company and updating record.
     app.post('/addCauseCharity',function(req,res){
                   Company.findOne({companyName: req.body.compName})
                           .exec(function(err,result){
@@ -155,6 +170,8 @@ module.exports = function(app){
                                 }
                         });
     });
+
+    //Fetching all Causes / Charities for particular Company.
     app.post('/companysCharities',function(req,res){
                   Company.findOne({companyName: req.body.companyName})
                           .exec(function(err,result){
@@ -167,4 +184,21 @@ module.exports = function(app){
                                 }
                         });
     });
+
+    //Load all Companies' record
+    app.get('/getAllCompanies',function(req,res){
+
+        Company.find({})
+                .exec(function(err,result){
+                  if(result){
+                      return res.json(result);
+                  }else{
+                    return res.status(400).send({
+                           message: 'No records found.'
+                        });
+                  }
+                });
+      });
+
+
 };

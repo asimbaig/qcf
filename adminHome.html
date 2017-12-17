@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<title>Quartet Community Foundation - Staff</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--<script src="client\lib\angular.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="client\lib\angular-route.min.js"></script>
+<script type="text/javascript" src="node_modules\ng-file-upload\dist\ng-file-upload.min.js"></script>
+<script src="client\mainApp.js"></script>
+<script src="client\LoginController.js"></script>
+<script src="client\LogoutController.js"></script>
+<script src="client\headerController.js"></script>
+<script src="client\adminHeaderController.js"></script>
+<script src="client\eventProgramController.js"></script>
+<script src="client\causeCharityController.js"></script>
+<script src="client\employeeProfileController.js"></script>
+<script src="client\employeeController.js"></script>
+<script src="client\companyProfileController.js"></script>
+<script src="client\companyController.js"></script>
+<script src="client\ContactController.js"></script>
+<script src="client\homeController.js"></script>
+<script src="client\loginRegisterController.js"></script>
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+<link href="assets\css\style.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="node_modules\angularjs-datepicker\src\css\angular-datepicker.css" rel="stylesheet" type="text/css" />
+
+<script src="node_modules\angularjs-datepicker\src\js\angular-datepicker.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<style>
+    h3,h4{font-family: 'Berkshire Swash', cursive; color:#C10013;}
+</style>
+</head>
+<body style="padding-top:50px">
+
+<header ng-include="'adminHeader.html'"></header>
+
+<main ng-view></main>
+
+<div class="jumbotron">
+		<div class="col-md-12" style="color:#fff">
+			© Quartet Community Foundation<br>
+			Royal Oak House, Royal Oak Avenue, Bristol, BS1 4GB<br>
+			0117 989 7700<br>
+			info@quartetcf.org.uk<br>
+			Registered Charity Number 1080418
+		</div>
+		<div class="col-md-12" style="color:#fff">
+			<strong>Follow us here</strong><hr>
+		</div>
+			<div class="col-md-12">
+                    <ul class="social-network social-circle">
+                        <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+			</div>
+	</div>
+</body>
+</html>

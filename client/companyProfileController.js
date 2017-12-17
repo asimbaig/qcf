@@ -1,12 +1,16 @@
+//Registering companyProfileController with Main application module 'myApp' & injecting dependencies
 myApp.controller('companyProfileController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
 
 				var companyData = JSON.parse(localStorage.getItem("companyData"));
 				$scope.comImage = companyData.logoPicture;
 				$scope.comName = companyData.companyName ;
-				$scope.comJoinDate = companyData.joinDate;
+
+				var myDate = new Date(companyData.joinDate);
+				$scope.comJoinDate = myDate.getDate()+" - "+myDate.getMonth()+" - "+myDate.getFullYear();
+
 				$scope.compCausesCharities = companyData.causesCharities;
 				$scope.employeeRegisterCode = companyData.empRegisterCode;
-
+				//Load Causes/Charities available for this company
 				$http({
 						 url: '/loadAvailableCharities',
 						 method: 'POST',
@@ -24,7 +28,7 @@ myApp.controller('companyProfileController',['Upload','$window','$scope','$http'
 									 console.log(response.data.message);
 								}
 					 });
-
+					//Ajax post call to load employees for this company
 				 $http({
  						 url: '/thisCompanyEmployees',
  						 method: 'POST',
@@ -49,9 +53,37 @@ myApp.controller('companyProfileController',['Upload','$window','$scope','$http'
 			 			 else {
 			 				 list.push(item);
 			 			 }
-			 			 console.log(list);
+			 			// console.log(list);
 			 };
+			 //Removing employee for this company
+			 $scope.removeEmployee = function(emp_name,emp_email,emp_ppic){
+				 var flag = confirm("Are you sure\nYou want to delete "+ emp_name +"'s record permanently?");
 
+				 if(flag===true){
+								//alert(emp_ppic);
+							 var temp = {
+								 fullName:emp_name,
+								 email:emp_email,
+								 profilePicture:emp_ppic
+							 };
+							 $http({
+									 url: '/RemoveEmp',
+									 method: 'POST',
+									 data: temp
+							 }).then(function (httpResponse) {
+								 		 if(httpResponse.status===200){
+											 							$route.reload();
+										 }
+								},
+			 					 function(response) {
+			 							 // failure callback,handle error here
+			 							 if(response.status===400){
+			 									 console.log("Something went wrong,while removing Employee");
+			 							 }
+			 					 });
+				 }
+  		 };
+			 //Removing cause/charity for this company
 			 $scope.removeCauseCharity = function(charity){
 				 var temp = {compName:companyData.companyName, causeCharity:charity };
 				 $http({
@@ -69,7 +101,7 @@ myApp.controller('companyProfileController',['Upload','$window','$scope','$http'
  							 }
  					 });
   		 };
-
+			 //Adding cause/charity for this company
 			 $scope.addCauseCharity = function(charity){
 				 toggle(charity,$scope.selected);
 				 var temp = {compName:companyData.companyName, causeCharity:charity };
@@ -90,6 +122,7 @@ myApp.controller('companyProfileController',['Upload','$window','$scope','$http'
  							 }
  					 });
   		 };
+			 //Adding new event/program
 			 $scope.addEventProgram = function(){
 				 localStorage.setItem("companyName",companyData.companyName);
 				 localStorage.setItem("eventProgramFlag","true");

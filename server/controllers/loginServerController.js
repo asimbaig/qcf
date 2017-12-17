@@ -1,3 +1,7 @@
+/*
+    Its server-end controller which handles all ajax http calls related to Login.
+*/
+//importing node modules express, and body-parser
 var bodyParser = require("body-parser");
 var multer = require('multer');
 var mongoose = require('mongoose');
@@ -6,12 +10,17 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://test:test@ds113586.mlab.com:13586/quartetdb', { useMongoClient: true });
 
-var Employee = mongoose.model('Employees');
+
+//creating object of Company model
 var Company = mongoose.model('Companies');
+//creating object of Employees model
+var Employee = mongoose.model('Employees');
+
 
 module.exports = function(app){
-
+  //receing Login Ajax request from Employee/Company Login
   app.post('/Login',function(req,res){
+      //Find login record in Companies Model
       Company.findOne({email: req.body.LoginEmail,password: req.body.LoginPass}).lean()
               .exec(function(err,result){
 
@@ -21,6 +30,7 @@ module.exports = function(app){
                     return res.send(result);
 
                 }else{
+                        //Find login record in Employees Model
                         Employee.findOne({email: req.body.LoginEmail,password: req.body.LoginPass}).lean()
                           .exec(function(err,result2){
                             if(result2){
@@ -38,5 +48,6 @@ module.exports = function(app){
 
               });
       });
+
 
 };

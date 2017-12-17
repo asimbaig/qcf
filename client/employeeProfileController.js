@@ -1,12 +1,18 @@
+//Registering employeeProfileController with Main application module 'myApp' & injecting dependencies
 myApp.controller('employeeProfileController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
 				var employeeData = JSON.parse(localStorage.getItem("employeeData"));
 
+				//Displaying Employee data on profile page
 				$scope.empImage = employeeData.profilePicture;
 				$scope.empName = employeeData.fullName ;
 				$scope.eventsProgram = employeeData.eventsProgram;
-				$scope.empJoinDate =  employeeData.joinDate;
+
+				var myDate = new Date(employeeData.joinDate);
+				$scope.empJoinDate = myDate.getDate()+" - "+myDate.getMonth()+" - "+myDate.getFullYear();
+
 				var companyChartiresCauses;
 
+				//Ajax post call to find comapny of particular employee
 				$http({
 						url: '/fetchCompany',
 						method: 'POST',
@@ -14,6 +20,8 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 				}).then(function (httpResponse) {
 						$scope.compLogo = httpResponse.data.logoPicture;
 						$scope.empCompany = httpResponse.data.companyName;
+						$scope.compCausesCharities = httpResponse.data.causesCharities;
+
 				},
 					function(response) {
 							// failure callback,handle error here
@@ -22,6 +30,7 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 							}
 					});
 
+				//Ajax post call to load events/programs which are available for this employee
 				$http({
 						 url: '/loadAvailableEvtProg',
 						 method: 'POST',
@@ -46,7 +55,7 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 									 console.log(response.data.message);
 							 }
 			});
-
+			//Removing Event/Program for this employee
 			$scope.removeEventProgram=function(ep){
  				 var temp = {fullName:employeeData.fullName, eventProgram:ep };
 	 				 $http({
@@ -66,7 +75,6 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 				};
 
 				$scope.selected = [];
-
 				toggle = function (item, list) {
 							var idx = list.indexOf(item);
 							if (idx > -1) {
@@ -75,9 +83,9 @@ myApp.controller('employeeProfileController',['Upload','$window','$scope','$http
 							else {
 								list.push(item);
 							}
-							console.log(list);
+							//console.log(list);
 				};
-
+				//Adding Event/Program for this employee
 				$scope.addEventProgram = function(item){
  				 toggle(item,$scope.selected);
  				 var temp = {fullName:employeeData.fullName, eventProgram:item };

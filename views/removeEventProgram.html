@@ -1,0 +1,26 @@
+<div class="container">
+  <br><br>
+  <H3>Remove Events/Programs</H3>
+  <div id="accordion">
+        <div ng-repeat="ep in allEventsPrograms">
+          <div class="card">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{ep._id}}" style="color:blue; cursor: pointer;">
+                {{ep.title}}      <span style="float:right; color:green">Date: <i>{{ep.date}}</i></span>
+                <br>
+                Organizer: {{ep.organizer}}
+              </a>
+              <div class="remove_emp" ng-click="removeEventProgram(ep._id,ep.title,ep.picture)" style="float:right; color:red">x</div>
+            </div>
+            <div id="collapse{{ep._id}}" class="collapse">
+              <div class="card-body">
+                <strong>Type: {{ep.type}}</strong><br>
+                <strong>Cause/Charity: {{ep.CauseCharity}}</strong><br>
+                <p>{{ep.eventProgramDesc}}</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+  </div>
+</div>

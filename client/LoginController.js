@@ -1,11 +1,14 @@
+//Registering LoginController with Main application module 'myApp' & injecting dependencies
 myApp.controller('LoginController',['$window','$scope','$http','$location','$route',function($window,$scope,$http,$location,$route){
      var vm = this;
 		 vm.submitLogin = function(){ //function to call on form submit
+              //Ajax post call to verify login details
           		$http({
 				          url: '/Login',
 				          method: 'POST',
 				          data: vm.data
 				      }).then(function (httpResponse) {
+                //Verify if its company login
                 if(httpResponse.data.CompanyFlag==='true' && httpResponse.data.EmployeeFlag==='false'){
                   var companyData ={
       								active : httpResponse.data.active,
@@ -27,8 +30,9 @@ myApp.controller('LoginController',['$window','$scope','$http','$location','$rou
                   localStorage.setItem("EmployeeFlag","false");
                   $window.location.href = '/main.html';
                 }
+                //Verify if its employee logging in
                 else if(httpResponse.data.CompanyFlag==='false' && httpResponse.data.EmployeeFlag==='true'){
-                  console.log("in  login response: - "+httpResponse.data.empRegisterCode);
+
                   var employeeData ={
                       active : httpResponse.data.active,
                       joinDate : httpResponse.data.joinDate,
@@ -67,10 +71,12 @@ myApp.controller('LoginController',['$window','$scope','$http','$location','$rou
                     }
                 });
 		 }
-     vm.submitRegCompany = function(){ //function to call on form submit
+
+     vm.submitRegCompany = function(){ //function call to register company
         $window.location.href = '/companyRegister.html';
      }
-     vm.submitRegEmployee = function(){ //function to call on form submit
+     vm.submitRegEmployee = function(){ //function call to register employee
         $window.location.href = '/employeeRegister.html';
      }
+
 }]);

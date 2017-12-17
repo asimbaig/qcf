@@ -1,87 +1,38 @@
+/**
+ * 	Its main entry point for angular front-end.
+ */
+ //Register new module named myApp and injecting dependencies
 var myApp = angular.module('myApp',['ngRoute','ngFileUpload','720kb.datepicker']);
 
+//Configing routes for 'Views' and associating controllers with them
 myApp.config(['$routeProvider',function($routeProvider){
-	$routeProvider
-	.when('/Login',{
-		templateUrl: '/index.html',
-		controller: 'LoginController'
-	})
-	.when('/Logout',{
-		templateUrl: '/logout.html',
-		controller: 'LogoutController'
-	})
-	.when('/header',{
-		templateUrl: '/header.html',
-		controller: 'headerController'
-	})
-	.when('/main',{
-		templateUrl: 'main.html',
-		controller: 'MainAppController'
-	})
-	.when('/home',{
-		templateUrl: 'views/home.html',
-		controller: 'mainController',
-		controllerAs: 'mc'
-	})
-	.when('/aboutUs',{
-		templateUrl: 'views/aboutUs.html',
-		controller: 'mainController'
-	})
-	.when('/employeeRegister',{
-		templateUrl: 'employeeRegister.html',
-		controller: 'employeeController'
-	})
-	.when('/employeeMain',{
-		templateUrl: 'views/employeeMain.html',
-		controller: 'employeeProfileController'
-	})
-	.when('/companyRegister',{
-		templateUrl: 'companyRegister.html',
-		controller: 'companyController'
-	})
-	.when('/companyMain',{
-		templateUrl: 'views/companyMain.html',
-		controller: 'companyProfileController'
-	})
-	.when('/contact',{
-		templateUrl: 'views/contact.html',
-		controller: 'ContactController'
-	})
-	.when('/contact-success',{
-		templateUrl: 'views/contact-success.html',
-		controller: 'ContactController'
-	})
-	.when('/eventProgram',{
-		templateUrl: 'views/event-program.html',
-		controller: 'eventProgramController'
-	})
-	.when('/causeCharity',{
-		templateUrl: 'views/cause-charity.html',
-		controller: 'causeCharityController'
-	})
-	.otherwise({
-		redirectTo: '/home'
-	});
 	//$locationProvider.html5Mode(true);
-}]);
+	$routeProvider
 
-myApp.service('FileService', ['Upload','$window',function(Upload,$window){
-            this.upload = function (file,http_url) {
-								Upload.upload({
-				            url: http_url, //webAPI exposed to upload the file
-				            data:{file:file} //pass file as data, should be user ng-model
-				        }).then(function (resp) { //upload function returns a promise
-				            if(resp.data.error_code === 0){ //validate success
-												localStorage.setItem("filename","uploads\\"+resp.data.fileName);
-												alert('Successfully Register. ');
-				            } else {
-				                $window.alert('an error occured');
-				            }
-				        }, function (resp) { //catch error
-				            $window.alert('Error status: ' + resp.status);
-				        }, function (evt) {
-				        });
-				    };
+	.when('/Login',{templateUrl: '/index.html',controller: 'LoginController'})
+	.when('/adminLogin',{templateUrl: '/adminLogin.html',controller: 'loginRegisterController'})
+	.when('/registerStaff',{templateUrl: 'views/staffRegister.html',controller: 'loginRegisterController'})
+	.when('/Logout',{templateUrl: '/logout.html',controller: 'LogoutController'})
+	.when('/header',{templateUrl: '/header.html',controller: 'headerController'})
+	.when('/adminHeader',{templateUrl: '/adminHeader.html',controller: 'adminHeaderController'})
+	.when('/home',{templateUrl: 'views/home.html',controller: 'homeController',controllerAs: 'mc'})
+	.when('/aboutUs',{templateUrl: 'views/aboutUs.html',controller: 'homeController'})
+	.when('/employeeRegister',{templateUrl: 'employeeRegister.html',controller: 'employeeController'})
+	.when('/employeeMain',{templateUrl: 'views/employeeMain.html',controller: 'employeeProfileController'})
+	.when('/companyRegister',{templateUrl: 'companyRegister.html',controller: 'companyController'})
+	.when('/companyMain',{templateUrl: 'views/companyMain.html',controller: 'companyProfileController'})
+	.when('/contact',{templateUrl: 'views/contact.html',controller: 'ContactController'})
+	.when('/contact-success',{templateUrl: 'views/contact-success.html',controller: 'ContactController'})
+	.when('/eventProgram',{templateUrl: 'views/event-program.html',controller: 'eventProgramController'})
+	.when('/causeCharity',{templateUrl: 'views/cause-charity.html',controller: 'causeCharityController'})
+
+	.when('/removeEventProgram',{templateUrl: 'views/removeEventProgram.html',controller: 'eventProgramController'})
+	.when('/removeCauseCharity',{templateUrl: 'views/removeCauseCharity.html',controller: 'causeCharityController'})
+	.when('/removeCompany',{templateUrl: 'views/removeCompany.html',controller: 'companyController'})
+	.when('/removeEmployee',{templateUrl: 'views/removeEmployee.html',controller: 'employeeController'})
+	.when('/removeStaff',{templateUrl: 'views/removeStaff.html',controller: 'loginRegisterController'})
+	.otherwise({redirectTo: '/home'});
+
 }]);
 
 myApp.run(function(){

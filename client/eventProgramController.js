@@ -1,5 +1,12 @@
+//Registering eventProgramController with Main application module 'myApp' & injecting dependencies
 myApp.controller('eventProgramController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
  var vm = this;
+ //Ajax get call to load all Events/Programs
+ $http.get('/loadEvents').then(function(response){
+      $scope.allEventsPrograms = response.data;
+ });
+
+ //Verify if its company who is adding event/program.
  if(localStorage.getItem("eventProgramFlag")==='true'){
                $scope.causesCharities = [];
                var comp = localStorage.getItem("companyName");
@@ -18,7 +25,8 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
                       }
                   });
  }
- else{
+ //Otherwise Its Quartet admin adding this event/program
+  else{
                  $http.get('/loadCharities').then(function(response){
                    var tempArray = [];
                     for(var t in response.data){
@@ -36,7 +44,7 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
                $scope.company = "QCF";
  }
  vm.submitFile = function(){ //function to call on form submit
-
+          //alert("enter submit");
 					if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
 								vm.upload(vm.file,vm.data); //call upload function
 						}
@@ -48,6 +56,7 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
             url: '/uploadep', //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
+          //alert("enter then");
             if(resp.data.error_code === 0){ //validate success
                     ep_data['picture'] = "uploads\\"+resp.data.fileName;
                   $http({
@@ -62,8 +71,6 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
                 $window.alert('an error occured');
             }
         }, function (resp) { //catch error
-            console.log("Hello "+resp.data);
-            console.log('Error status: ' + resp.status);
             $window.alert('Error status: ' + resp.status);
         }, function (evt) {
             console.log(evt);
@@ -72,5 +79,32 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
             vm.progress = 'File uploading progress: ' + progressPercentage + '% '; // capture upload progress
         });
     };
+    $scope.removeEventProgram = function(Id,Title,Picture){
+      var flag = confirm("Are you sure\nYou want to delete this Event/Program: "+ Title +" permanently?");
 
+      if(flag===true){
+             //alert(emp_ppic);
+            var temp = {
+              id:Id,
+              title:Title,
+              picture:Picture
+            };
+            $http({
+                url: '/RemoveEvtProg',
+                method: 'POST',
+                data: temp
+            }).then(function (httpResponse) {
+                  if(httpResponse.status===200){
+                                 $route.reload();
+                  }
+             },
+              function(response) {
+                  // failure callback,handle error here
+                  if(response.status===400){
+                      console.log("Something went wrong,while removing Event/Program");
+                  }
+              });
+      }
+
+    };
 }]);
