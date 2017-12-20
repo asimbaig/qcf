@@ -2,14 +2,20 @@
     <br><br>
     <H3>Remove Employees</H3>
     <div id="accordion">
-          <div ng-repeat="emp in allEmployees">
+          <div class="form-group">
+            <label for="_search">Search</label>
+            <input type="text" class="form-control" ng-model="search"/>
+          </div>
+
+
+          <div ng-repeat="emp in allEmployees | filter:search">
             <div class="card">
               <div class="card-header">
                 <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
                   {{emp.fullName}}  ({{emp.role}})                           <span style="float:right; color:green">Member since: <i>{{emp.joinDate}}</i></span><br>
                   {{emp.email}}
                 </a>
-                <div class="remove_emp" ng-click="removeEmployee(emp.fullName,emp.email,emp.profilePicture)" style="float:right; color:red">x</div>
+                <div class="remove_emp" ng-click="removeEmployee(emp.fullName,emp.email,emp.profilePicture)" style="float:right; color:red">X</div>
               </div>
               <div id="collapse{{emp._id}}" class="collapse">
                 <div class="card-body">

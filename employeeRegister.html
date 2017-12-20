@@ -4,7 +4,6 @@
 <title>Quartet Community Foundation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--<script src="client\lib\angular.min.js"></script>-->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="client\lib\angular-route.min.js"></script>
 <script type="text/javascript" src="node_modules\ng-file-upload\dist\ng-file-upload.min.js"></script>
@@ -24,18 +23,15 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
-<link href="assets\css\style.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <link href="node_modules\angularjs-datepicker\src\css\angular-datepicker.css" rel="stylesheet" type="text/css" />
+<link href="assets\css\style.css" rel="stylesheet" />
 
 <script src="node_modules\angularjs-datepicker\src\js\angular-datepicker.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<style>
-    h3,h4{font-family: 'Berkshire Swash', cursive; color:#C10013;}
-</style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
   <body>
 <div class="container">
@@ -95,13 +91,6 @@
       <label for="registerCode">Registeration Code <span style="color:red;font-size:small;">(Please contact your company,if dont have Register code)<span></label>
       <input type="text" class="form-control" id="registerCode" ng-model="up.data.regCode"  ng-required="true" placeholder="xxxxxxxx"/>
     </div>
-
-    <!--<div class="form-group">
-        <label for="employeeCompany">Select your company</label>
-        <select class="form-control" id="employeeCompany" ng-model="up.data.empCompany">
-          <option ng-repeat="c in companies" value="{{c.companyName}}">{{c.companyName}}</option>
-        </select>
-    </div>-->
 
     <button type="submit"  ng-click="up.submitFile()" class="btn btn-primary" style="float: right">Submit</button>
             <br><br><br>

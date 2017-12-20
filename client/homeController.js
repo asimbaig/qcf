@@ -24,4 +24,10 @@ myApp.controller('homeController',['$scope','$http',function($scope,$http){
 			$http.get('data/sstories.json').then(function(response){
 						 $scope.sstories = response.data;
 			});
+
+			//Setup data for Reports Tab in home page
+			$http.get('data/reports.json').then(function(response){
+						 $scope.reports = response.data;
+			});
+
 }]);

@@ -5,12 +5,14 @@ myApp.controller('headerController',['Upload','$window','$scope','$http','$locat
           var companyData = JSON.parse(localStorage.getItem("companyData"));
           $scope.profile='#!/companyMain';
           $scope.name = companyData.companyName;
+          $scope.Image = companyData.logoPicture;
   }
   //Verify if its employee login and setting up href attribute of profile to employee.
   else if(localStorage.getItem("EmployeeFlag")==='true'){
           var employeeData = JSON.parse(localStorage.getItem("employeeData"));
           $scope.profile='#!/employeeMain';
           $scope.name = employeeData.fullName;
+          $scope.Image = employeeData.profilePicture;
 
   }else{
           $scope.profile='';

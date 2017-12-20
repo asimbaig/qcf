@@ -4,19 +4,22 @@
 
           <ul class="nav nav-tabs flex-wrap" role="tablist">
               <li class="nav-item" style="background-color:#A3E4D7;">
-                <a class="nav-link" href="#newsTab" role="tab" data-toggle="tab" ng-click="mc.addNews()">News</a>
+                <a class="nav-link" href="#newsTab" role="tab" data-toggle="tab">News</a>
               </li>
               <li class="nav-item" style="background-color:#F9E79F;">
-                <a class="nav-link" href="#eventsTab" role="tab" data-toggle="tab" ng-click="mc.addEvents()">Events/Programs</a>
+                <a class="nav-link" href="#eventsTab" role="tab" data-toggle="tab">Events/Programs</a>
               </li>
               <li class="nav-item" style="background-color:#C39BD3;">
-                <a class="nav-link" href="#charityTab" role="tab" data-toggle="tab" ng-click="mc.addCharity()">Charities/Causes</a>
+                <a class="nav-link" href="#charityTab" role="tab" data-toggle="tab">Charities/Causes</a>
               </li>
               <li class="nav-item" style="background-color:#FADBD8;">
-                <a class="nav-link" href="#succesStoriesTab" role="tab" data-toggle="tab" ng-click="mc.addSStories()">Success Stories</a>
+                <a class="nav-link" href="#succesStoriesTab" role="tab" data-toggle="tab">Success Stories</a>
               </li>
               <li class="nav-item" style="background-color:#85C1E9;">
-                <a class="nav-link" href="#businessTab" role="tab" data-toggle="tab" ng-click="mc.addPartners()">Our Sponsors</a>
+                <a class="nav-link" href="#businessTab" role="tab" data-toggle="tab">Our Sponsors</a>
+              </li>
+              <li class="nav-item" style="background-color:#80ff80;">
+                <a class="nav-link" href="#reportsTab" role="tab" data-toggle="tab">Spending Reports</a>
               </li>
           </ul>
 
@@ -106,6 +109,23 @@
                       </div>
                     </div>
                   </div>
+
+                  <div role="tabpanel" class="tab-pane fade" id="reportsTab">
+                    <div ng-repeat="r in reports">
+                      <div class="card">
+                        <div class="card-block">
+                          <div style="background-color:#80ff80; padding:1em; text-align: center;">
+                              <strong class="card-title">{{r.reportTitle}}</strong><br>
+                              <i class="card-title">{{r.projectDates}}</i>
+                          </div>
+                          <img ng-src="{{r.reportPicture}}" alt="{{r.reportTitle}}"><br>
+                          <a class="btn btn-outline-primary" href="{{r.reportFile}}" download style="float:right">Download Report</a>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
               </div>
         </div>
 </div>

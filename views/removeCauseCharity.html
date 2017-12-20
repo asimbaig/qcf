@@ -2,7 +2,12 @@
   <br><br>
   <H3>Remove Causes/Charties</H3>
   <div id="accordion">
-        <div ng-repeat="cc in allCausesCharities">
+        <div class="form-group">
+          <label for="_search">Search</label>
+          <input type="text" class="form-control" ng-model="search"/>
+        </div>
+
+        <div ng-repeat="cc in allCausesCharities | filter:search">
           <div class="card">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{cc._id}}" style="color:blue; cursor: pointer;">
@@ -10,7 +15,7 @@
                 <br>
                 {{cc.email}}
               </a>
-              <div class="remove_emp" ng-click="removeCauseCharity(cc._id,cc.title,cc.picture)" style="float:right; color:red">x</div>
+              <div class="remove_emp" ng-click="removeCauseCharity(cc._id,cc.title,cc.picture)" style="float:right; color:red">X</div>
             </div>
             <div id="collapse{{cc._id}}" class="collapse">
               <div class="card-body">
@@ -23,4 +28,5 @@
 
         </div>
   </div>
+  <br><br>
 </div>

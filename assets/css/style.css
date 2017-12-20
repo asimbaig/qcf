@@ -1,6 +1,8 @@
 #main-border        {width:98%;  padding: 10px;box-shadow:5px 5px 10px #808080; margin-bottom:10px}
 #main-title-border  {width:99%;  padding: 10px;box-shadow:5px 5px 10px #808080; margin-bottom:10px}
 
+h3,h4{font-family: 'Berkshire Swash', cursive; color:#C10013;}
+
 .remove{
     float: right;
     padding: 5px;
@@ -33,7 +35,8 @@
     color: #000;
 }
 .nav-tabs > li > a:hover{
-    background-color: #D3D3D3 !important;
+    background-color: #fff !important;
+    opacity: 0.3;
     border: medium;
     //border-radius: 0;
     color:red;

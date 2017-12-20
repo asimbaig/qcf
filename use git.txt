@@ -1,5 +1,0 @@
-git remote add Quartet-Foundation-Project git@gitlab.uwe.ac.uk:m2-baig/Quartet-Foundation-Project.git
-
-git push Quartet-Foundation-Project
-
-git push --set-upstream Quartet-Foundation-Project first-branch
