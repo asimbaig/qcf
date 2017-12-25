@@ -8,7 +8,9 @@
 <script src="client\lib\angular-route.min.js"></script>
 <script type="text/javascript" src="node_modules\ng-file-upload\dist\ng-file-upload.min.js"></script>
 <script src="client\mainApp.js"></script>
-<script src="client\LoginController.js"></script>
+<script src="client\loginRegisterController.js"></script>
+
+<!--<script src="client\LoginController.js"></script>
 <script src="client\LogoutController.js"></script>
 <script src="client\headerController.js"></script>
 <script src="client\adminHeaderController.js"></script>
@@ -19,8 +21,8 @@
 <script src="client\companyProfileController.js"></script>
 <script src="client\companyController.js"></script>
 <script src="client\ContactController.js"></script>
-<script src="client\homeController.js"></script>
-<script src="client\loginRegisterController.js"></script>
+<script src="client\homeController.js"></script>-->
+
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -37,7 +39,7 @@
 </head>
   <body>
     <div class="container">
-        <div style="padding: 100px 100px 100px 100px">
+        <div class="login_div">
         <img src="data\Quartet-logo.png" class="rounded mx-auto d-block" alt="Quartet Community Foundation">
         <br><br>
         <h3>Welcome, Login as Quartet Foundation's Staff</h3>
@@ -54,7 +56,7 @@
               <div style="color:red;">{{message}}</div>
               <button type="submit"  ng-click="LoginCont.submitAdminLogin()" class="btn btn-primary" style="float: right">Login</button>
               <br>
-              <a class="btn btn-link" href="#">Forgot password?</a>
+              <a class="btn btn-link" href="/forgotten.html">Forgot password?</a>
       </form>
     </div>
     </div>

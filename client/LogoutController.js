@@ -1,10 +1,10 @@
 //Registering LogoutController with Main application module 'myApp' & injecting dependencies
 myApp.controller('LogoutController',['$window','$scope','$http','$location','$route',function($window,$scope,$http,$location,$route){
-      localStorage.setItem("employeeData","");
-      localStorage.setItem("EmployeeFlag","false");
+      sessionStorage.setItem("employeeData","");
+      sessionStorage.setItem("EmployeeFlag","false");
 
-      localStorage.setItem("companyData","");
-      localStorage.setItem("CompanyFlag","false");
+      sessionStorage.setItem("companyData","");
+      sessionStorage.setItem("CompanyFlag","false");
 
      var vm = this;
 		 vm.submitLogin = function(){ //function to call on form submit
@@ -29,11 +29,11 @@ myApp.controller('LogoutController',['$window','$scope','$http','$location','$ro
                     regCode: httpResponse.data.regCode,
                     empRegisterCode: httpResponse.data.empRegisterCode
       						};
-      						localStorage.setItem("companyData",JSON.stringify(companyData));
-                  localStorage.setItem("CompanyFlag","true");
+      						sessionStorage.setItem("companyData",JSON.stringify(companyData));
+                  sessionStorage.setItem("CompanyFlag","true");
 
-                  localStorage.setItem("employeeData","");
-                  localStorage.setItem("EmployeeFlag","false");
+                  sessionStorage.setItem("employeeData","");
+                  sessionStorage.setItem("EmployeeFlag","false");
                   $window.location.href = '/main.html';
                 }
                 //Verify if its employee logging in
@@ -50,19 +50,19 @@ myApp.controller('LogoutController',['$window','$scope','$http','$location','$ro
                     empRegisterCode: httpResponse.data.empRegisterCode,
                     role:httpResponse.data.role
                   };
-                  localStorage.setItem("employeeData",JSON.stringify(employeeData));
-                  localStorage.setItem("EmployeeFlag","true");
+                  sessionStorage.setItem("employeeData",JSON.stringify(employeeData));
+                  sessionStorage.setItem("EmployeeFlag","true");
 
-                  localStorage.setItem("companyData","");
-                  localStorage.setItem("CompanyFlag","false");
+                  sessionStorage.setItem("companyData","");
+                  sessionStorage.setItem("CompanyFlag","false");
                   $window.location.href = '/main.html';
                 }
                 else{
-                  localStorage.setItem("employeeData","");
-                  localStorage.setItem("EmployeeFlag","false");
+                  sessionStorage.setItem("employeeData","");
+                  sessionStorage.setItem("EmployeeFlag","false");
 
-                  localStorage.setItem("companyData","");
-                  localStorage.setItem("CompanyFlag","false");
+                  sessionStorage.setItem("companyData","");
+                  sessionStorage.setItem("CompanyFlag","false");
                   alert("Email / Password mismatch.\n Please try again");
 
                 }

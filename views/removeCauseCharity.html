@@ -4,7 +4,7 @@
   <div id="accordion">
         <div class="form-group">
           <label for="_search">Search</label>
-          <input type="text" class="form-control" ng-model="search"/>
+          <input type="text" class="form-control" ng-model="search" placeholder="Search from Causes/Charties' record"/>
         </div>
 
         <div ng-repeat="cc in allCausesCharities | filter:search">

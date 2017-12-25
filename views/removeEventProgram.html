@@ -4,7 +4,7 @@
   <div id="accordion">
         <div class="form-group">
           <label for="_search">Search</label>
-          <input type="text" class="form-control" ng-model="search"/>
+          <input type="text" class="form-control" ng-model="search" placeholder="Search from Events/Programs' record"/>
         </div>
 
         <div ng-repeat="ep in allEventsPrograms | filter:search">

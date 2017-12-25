@@ -18,7 +18,6 @@ var employeeSchema = new mongoose.Schema({
     phone:String,
     email:String,
     password:String,
-    //company:String,
     joinDate:Date,
     active:Boolean,
     eventsProgram:[String],

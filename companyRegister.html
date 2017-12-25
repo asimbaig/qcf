@@ -14,9 +14,9 @@
 <script src="client\eventProgramController.js"></script>
 <script src="client\causeCharityController.js"></script>
 <script src="client\employeeProfileController.js"></script>
-<script src="client\employeeController.js"></script>
+<script src="client\employeeRegisterController.js"></script>
 <script src="client\companyProfileController.js"></script>
-<script src="client\companyController.js"></script>
+<script src="client\companyRegisterController.js"></script>
 <script src="client\ContactController.js"></script>
 <script src="client\homeController.js"></script>
 
@@ -38,7 +38,7 @@
     <br><br>
     <h3>Sign Up with QCF as Participating Company</h3>
     <hr>
-    <form ng-controller="companyController as up" name="up.upload_form">
+    <form ng-controller="companyRegisterController as up" name="up.upload_form">
               <div class="form-group">
                 <label for="companyName">Company</label>
                 <input type="text" class="form-control" id="companyName" ng-model="up.data.comName"  ng-required="true"/>

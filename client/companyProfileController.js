@@ -1,7 +1,7 @@
 //Registering companyProfileController with Main application module 'myApp' & injecting dependencies
 myApp.controller('companyProfileController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
 
-				var companyData = JSON.parse(localStorage.getItem("companyData"));
+				var companyData = JSON.parse(sessionStorage.getItem("companyData"));
 				$scope.comImage = companyData.logoPicture;
 				$scope.comName = companyData.companyName ;
 
@@ -124,8 +124,8 @@ myApp.controller('companyProfileController',['Upload','$window','$scope','$http'
   		 };
 			 //Adding new event/program
 			 $scope.addEventProgram = function(){
-				 localStorage.setItem("companyName",companyData.companyName);
-				 localStorage.setItem("eventProgramFlag","true");
+				 sessionStorage.setItem("companyName",companyData.companyName);
+				 sessionStorage.setItem("eventProgramFlag","true");
 				 $location.path('eventProgram');
 
 			 };

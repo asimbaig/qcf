@@ -2,14 +2,14 @@
 myApp.controller('adminHeaderController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
 
   //Verify if its admin staff login and setting up menu attributes accordingly
-  if(localStorage.getItem("staffFlag")==='true'){
-          var staffData = JSON.parse(localStorage.getItem("staffData"));
+  if(sessionStorage.getItem("staffFlag")==='true'){
+          var staffData = JSON.parse(sessionStorage.getItem("staffData"));
           $scope.addUser = 'true';
           $scope.managers = 'true';
   }
   //Verify if its user staff login and setting up menu attributes accordingly
-  else if(localStorage.getItem("staffFlag")==='false'){
-          var staffData = JSON.parse(localStorage.getItem("staffData"));
+  else if(sessionStorage.getItem("staffFlag")==='false'){
+          var staffData = JSON.parse(sessionStorage.getItem("staffData"));
           $scope.addUser = 'false';
           $scope.managers = 'true';
 
@@ -20,8 +20,10 @@ myApp.controller('adminHeaderController',['Upload','$window','$scope','$http','$
 
   //logout from staff area
   $scope.logout = function(){
-          localStorage.setItem("staffData","");
-          localStorage.setItem("staffFlag","");
+          //sessionStorage.setItem("staffData","");
+          //sessionStorage.setItem("staffFlag","");
+          sessionStorage.removeItem('staffData');
+          sessionStorage.removeItem('staffFlag');
           $scope.addUser = 'false';
           $scope.managers = 'false';
           $window.location.href = '/adminLogin.html';

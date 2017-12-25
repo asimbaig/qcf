@@ -35,15 +35,19 @@
           </div>
         </fieldset>
       </div>
+
       <br>
       <div style="float:right; color:red"><h5>Employee Registration Code : {{employeeRegisterCode}}</h5></div>
       <br>
       <hr>
       <div class="container">
         <h3>{{comName}}'s Participating Employees</h3>
-
+        <div class="form-group">
+          <label for="_search">Search</label>
+          <input type="text" class="form-control" ng-model="search" placeholder="Search from Participating Employees' record"/>
+        </div>
         <div id="accordion">
-              <div ng-repeat="emp in allEmployees">
+              <div ng-repeat="emp in allEmployees | filter:search">
                 <div class="card">
                   <div class="card-header">
                     <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
@@ -76,7 +80,7 @@
       <br>
       <h4>Reports</h4>
       <hr>
-      
+
       <input type="image" src="data\report1.jpg" class="rounded float-left" alt="Employees Participation Reports"/>
 
       <input type="image" src="data\report7.jpg" class="rounded float-right" alt="Employees Participation Reports"/>

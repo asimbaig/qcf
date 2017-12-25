@@ -18,16 +18,16 @@ myApp.controller('loginRegisterController',['$window','$scope','$http','$locatio
                     role : httpResponse.data.role
                 };
                 if(httpResponse.data.role==='admin'){
-                      localStorage.setItem("staffFlag","true");
-                      localStorage.setItem("staffData",JSON.stringify(staffData));
+                      sessionStorage.setItem("staffFlag","true");
+                      sessionStorage.setItem("staffData",JSON.stringify(staffData));
 
                  }else if(httpResponse.data.role==='user'){
-                      localStorage.setItem("staffFlag","false");
-                      localStorage.setItem("staffData",JSON.stringify(staffData));
+                      sessionStorage.setItem("staffFlag","false");
+                      sessionStorage.setItem("staffData",JSON.stringify(staffData));
 
                  }else{
-                      localStorage.setItem("staffData","");
-                      localStorage.setItem("staffFlag","");
+                      sessionStorage.setItem("staffData","");
+                      sessionStorage.setItem("staffFlag","");
                 }
                 $window.location.href = '/adminHome.html';
 				      },
@@ -54,12 +54,12 @@ myApp.controller('loginRegisterController',['$window','$scope','$http','$locatio
                    role : httpResponse.data.role
                };
                if(httpResponse.data.role==='admin'){
-                     localStorage.setItem("staffFlag","true");
+                     sessionStorage.setItem("staffFlag","true");
                 }else{
-                     localStorage.setItem("staffFlag","false");
+                     sessionStorage.setItem("staffFlag","false");
                 }
 
-               localStorage.setItem("staffData",JSON.stringify(staffData));
+               sessionStorage.setItem("staffData",JSON.stringify(staffData));
                $window.location.href = '/adminHome.html';
 
              },

@@ -1,8 +1,8 @@
 //Registering homeController with Main application module 'myApp' & injecting dependencies
 myApp.controller('homeController',['$scope','$http',function($scope,$http){
 
-			localStorage.setItem("companyName","");
-			localStorage.setItem("eventProgramFlag","false");
+			sessionStorage.setItem("companyName","");
+			sessionStorage.setItem("eventProgramFlag","false");
 
 			//Setup data for News Tab in home page
 			$http.get('data/news.json').then(function(response){

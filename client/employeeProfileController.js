@@ -1,6 +1,6 @@
 //Registering employeeProfileController with Main application module 'myApp' & injecting dependencies
 myApp.controller('employeeProfileController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
-				var employeeData = JSON.parse(localStorage.getItem("employeeData"));
+				var employeeData = JSON.parse(sessionStorage.getItem("employeeData"));
 
 				//Displaying Employee data on profile page
 				$scope.empImage = employeeData.profilePicture;

@@ -8,7 +8,7 @@
 <script src="client\lib\angular-route.min.js"></script>
 <script type="text/javascript" src="node_modules\ng-file-upload\dist\ng-file-upload.min.js"></script>
 <script src="client\mainApp.js"></script>
-<script src="client\LogoutController.js"></script>
+<script src="client\ContactController.js"></script>
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -24,32 +24,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
   <body>
-    <div class="container">
-      <div class="login_div">
-      <img src="data\Quartet-logo.png" class="rounded mx-auto d-block" alt="Quartet Community Foundation">
-      <br><br>
-        <h3 style="color:red;">You have successfully logout!!!</h3>
-        <hr>
-        <form ng-controller="LogoutController as LoginCont2" name="LoginCont2.upload_form">
-              <div class="form-group">
-                <label for="Email">Email</label>
-                <input type="email" class="form-control" id="Email"  ng-model="LoginCont2.data.LoginEmail"/>
-              </div>
-              <div class="form-group">
-                <label for="Password">Password</label>
-                <input type="password" class="form-control" id="Password" ng-model="LoginCont2.data.LoginPass"/>
-              </div>
-              <div style="color:red;">{{message}}</div>
-              <button type="submit"  ng-click="LoginCont2.submitLogin()" class="btn btn-primary" style="float: right">Login</button>
-              <br>
-              <a class="btn btn-link" href="/forgotten.html">Forgot password?</a>
-              <br>
-              <a class="btn btn-link" href="" ng-click="LoginCont2.submitRegCompany()">Register as Company</a>
-              <br>
-              <a class="btn btn-link" href="" ng-click="LoginCont2.submitRegEmployee()">Register as Employee</a>
-      </form>
-    </div>
-    </div>
+<div class="container">
+  <br><br>
+  <img src="data\Quartet-logo.png" class="rounded mx-auto d-block" alt="Quartet Community Foundation">
 
-  </body>
+	<br><br>
+	<h3>Manage Account </h3>
+	<hr>
+	<form  ng-controller="ContactController as up">
+
+	<div class="form-group">
+			<label for="forgottenEmail">Please provide email address register with us</label>
+			<input class="form-control" type="email" id="forgottenEmail" name="email" ng-model="forgotten.email" required="true"/>
+			<div>
+        <br>
+  			<button type="submit"  ng-click="up.sendEmail()" class="btn btn-primary" style="float: right">Submit</button>
+  			<br><br>
+			</div>
+		</div>
+  </form>
+</div>
+</body>
 </html>

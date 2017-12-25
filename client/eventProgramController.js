@@ -7,9 +7,9 @@ myApp.controller('eventProgramController',['Upload','$window','$scope','$http','
  });
 
  //Verify if its company who is adding event/program.
- if(localStorage.getItem("eventProgramFlag")==='true'){
+ if(sessionStorage.getItem("eventProgramFlag")==='true'){
                $scope.causesCharities = [];
-               var comp = localStorage.getItem("companyName");
+               var comp = sessionStorage.getItem("companyName");
                $scope.company = comp;
                $http({
                     url: '/companysCharities',

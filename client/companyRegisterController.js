@@ -1,5 +1,5 @@
-//Registering companyController with Main application module 'myApp' & injecting dependencies
-myApp.controller('companyController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
+//Registering companyRegisterController with Main application module 'myApp' & injecting dependencies
+myApp.controller('companyRegisterController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
  var vm = this;
 
  $http.get('/getAllCompanies').then(function(response){
@@ -10,7 +10,6 @@ myApp.controller('companyController',['Upload','$window','$scope','$http','$loca
    var flag = confirm("Are you sure\nYou want to delete "+ company_Name +"'s record and all of its related Employees' record permanently?");
 
    if(flag===true){
-          //alert(emp_ppic);
          var temp = {
            companyName:company_Name,
            email:Email,
@@ -100,10 +99,10 @@ myApp.controller('companyController',['Upload','$window','$scope','$http','$loca
                     regCode: httpResponse.data.regCode,
                     empRegisterCode: httpResponse.data.empRegisterCode
                 };
-                //Saving companyData in localStorage to be use in Profile
-                localStorage.setItem("companyData",JSON.stringify(companyData));
-                localStorage.setItem("CompanyFlag","true");
-                localStorage.setItem("EmployeeFlag","false");
+                //Saving companyData in sessionStorage to be use in Profile
+                sessionStorage.setItem("companyData",JSON.stringify(companyData));
+                sessionStorage.setItem("CompanyFlag","true");
+                sessionStorage.setItem("EmployeeFlag","false");
                 $window.location.href = '/main.html';
               },
                 function(response) {

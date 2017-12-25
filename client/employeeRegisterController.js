@@ -1,5 +1,5 @@
-//Registering employeeController with Main application module 'myApp' & injecting dependencies
-myApp.controller('employeeController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
+//Registering employeeRegisterController with Main application module 'myApp' & injecting dependencies
+myApp.controller('employeeRegisterController',['Upload','$window','$scope','$http','$location','$route',function(Upload,$window,$scope,$http,$location,$route){
  var vm = this;
 
  $http.get('/getAllEmployees').then(function(response){
@@ -87,9 +87,9 @@ myApp.controller('employeeController',['Upload','$window','$scope','$http','$loc
                               role : httpResponse2.data.role,
                               empRegisterCode: httpResponse2.data.empRegisterCode
                           };
-                          localStorage.setItem("employeeData",JSON.stringify(employeeData));
-                          localStorage.setItem("EmployeeFlag","true");
-                          localStorage.setItem("CompanyFlag","false");
+                          sessionStorage.setItem("employeeData",JSON.stringify(employeeData));
+                          sessionStorage.setItem("EmployeeFlag","true");
+                          sessionStorage.setItem("CompanyFlag","false");
 
                           $window.location.href = '/main.html';
 
