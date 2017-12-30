@@ -4,13 +4,13 @@
     <div id="accordion">
           <div class="form-group">
             <label for="_search">Search</label>
-            <input type="text" class="form-control" ng-model="search" placeholder="Search from Employees' record"/>
+            <input type="text" class="form-control" ng-model="search" placeholder="Search from Employees' record" style="background-color:#FADBD8;"/>
           </div>
 
 
           <div ng-repeat="emp in allEmployees | filter:search">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header" style="background-color:#FADBD8;">
                 <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
                   {{emp.fullName}}  ({{emp.role}})                           <span style="float:right; color:green">Member since: <i>{{emp.joinDate}}</i></span><br>
                   {{emp.email}}

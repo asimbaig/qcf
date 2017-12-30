@@ -15,16 +15,16 @@
 
         <br><br><br><br>
 
-        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
-          <h4>Currenting signed up Events and Programs:</h4>
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px; background-color:#80ff80;">
+          <h4>Currently signed up Events and Programs:</h4>
             <ul class="list-group">
               <li class="list-group-item" ng-repeat="ep in eventsProgram"><h6>{{ep}}</h6><div class="remove" ng-click="removeEventProgram(ep)">x</div></li>
             </ul>
         </div>
         <br>
-        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px;  background-color:#80ff80;">
           <fieldset class="form-group">
-            Choose from Upcoming Events and Programs
+            <h4>Choose from Upcoming Events and Programs</h4>
             <hr>
             <div ng-repeat="aep in avlEventsPrograms">
                <div class="form-check">

@@ -11,8 +11,8 @@
 
         <br><br><br><br>
 
-        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
-          <h4>Currenting supported Causes/Charities :</h4>
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px; background-color:#F9E79F;">
+          <h4>Currently supported Causes/Charities :</h4>
             <ul class="list-group">
               <li class="list-group-item" ng-repeat="cc in compCausesCharities"><h6>{{cc}}</h6><div class="remove" ng-click="removeCauseCharity(cc)">x</div></li>
             </ul>
@@ -21,7 +21,7 @@
 
         <br>
 
-        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px">
+        <div style="border: solid grey 2px; border-radius: 15px; padding: 10px;  background-color:#F9E79F;">
         <fieldset class="form-group">
           <h4>Choose Causes/Charities you want to support:</h4>
           <hr>
@@ -44,12 +44,12 @@
         <h3>{{comName}}'s Participating Employees</h3>
         <div class="form-group">
           <label for="_search">Search</label>
-          <input type="text" class="form-control" ng-model="search" placeholder="Search from Participating Employees' record"/>
+          <input type="text" class="form-control" ng-model="search" placeholder="Search from Participating Employees' record" style="background-color:#F9E79F;"/>
         </div>
         <div id="accordion">
               <div ng-repeat="emp in allEmployees | filter:search">
-                <div class="card">
-                  <div class="card-header">
+                <div class="card" style="background-color: black;">
+                  <div class="card-header" style="background-color:#F9E79F;">
                     <a class="card-link" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{emp._id}}" style="color:blue; cursor: pointer;">
                       {{emp.fullName}}  ({{emp.role}})                           <span style="float:right; color:green">Member since: <i>{{emp.joinDate}}</i></span><br>
                       {{emp.email}}
@@ -58,7 +58,7 @@
                   </div>
                   <div id="collapse{{emp._id}}" class="collapse">
                     <div class="card-body">
-                      <strong>Events and Programs signed up for</strong>
+                      <strong style="color:red;">Events and Programs signed up for</strong>
                       <div ng-repeat="ep in emp.eventsProgram">
                           <ul class="list-group">
                             <li class="list-group-item">{{ep}}</li>
